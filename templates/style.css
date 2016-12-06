@@ -1,3 +1,54 @@
 body { /* overall */
 
+/* Color scheme:
+   grey: 6B7F82
+   light blue: 8EB8E5 -- USED
+   magenta: 9E788F
+   purple: 49306B -- USED
+   bright blue: 4D6CFA -- USED
+   turquoise: 60E1E0 -- USED
+   yellow: ECC30B */
+
+    color: black;
+    background-color: #8EB8E5;
+
+}
+
+
+.stream { /* where the song is */
+
+    background-color: #4D6CFA;
+
+}
+
+
+.stream:hover { /* hovering over the song */
+
+    background-color: #60E1E0;
+
+}
+
+
+.forecast { /* where the weather is */
+
+    background-color: #4D6CFA;
+
+}
+
+
+.forecast:hover { /* hovering over the forecast */
+
+    background-color: #60E1E0;
+
+}
+
+
+#heading { /* headings */
+
+    color: #49306B;
+    text-align: center;
+    font-style: italic;
+    font-size: 125%;
+    text-shadow: -1px 0 #B8CDF8, 0 1px #B8CDF8, 1px 0 #B8CDF8, 0 -1px #B8CDF8;
+
 }
