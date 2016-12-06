@@ -8,6 +8,10 @@ We started to develop our idea, and create a thorough design document.
 Which APIs are we using???
 FIND OUT NEXT TIME!
 
+MichaelW -- 2016-12-5
+finished working login/register system
+some html with no css
+
 VannaM -- 2016-12-05 19:32
 weather database created w/weather conditions, genres
 first, basic iteration of processor (can get genre from given weather conditions)
