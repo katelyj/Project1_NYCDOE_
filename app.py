@@ -67,6 +67,19 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
+@app.route("/search/", methods=["GET"])
+def search():
+    #check which button they picked
+    #if request.args["find_me"]
+    #   use maps api to locate person// maybe database?
+    #elif request.args["enter_city"]
+    #  f = city_list.db or whatever
+    #  db = sqlite3.connect(f)
+    #  c = db.cursor()
+    #  q = "SELECT city from cities"
+    #  c.execute(q)
+    return render_template("search.html")
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
