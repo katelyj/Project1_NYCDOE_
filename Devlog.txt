@@ -7,3 +7,7 @@ All Members -- 2016-12-1 During Class
 We started to develop our idea, and create a thorough design document.
 Which APIs are we using???
 FIND OUT NEXT TIME!
+
+VannaM -- 2016-12-05 19:32
+weather database created w/weather conditions, genres
+first, basic iteration of processor (can get genre from given weather conditions)
