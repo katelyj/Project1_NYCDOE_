@@ -15,3 +15,8 @@ some html with no css
 VannaM -- 2016-12-05 19:32
 weather database created w/weather conditions, genres
 first, basic iteration of processor (can get genre from given weather conditions)
+
+MichaelW -- 2016-12-6 During Class
+created Saved Songs database
+worked on account settings
+
