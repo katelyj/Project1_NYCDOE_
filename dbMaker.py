@@ -15,7 +15,7 @@ c.execute(q)
 q = "CREATE TABLE weather (mode TEXT, genre TEXT)"
 c.execute(q)
 
-conditions = {"snowing": "seasonal and holiday", "cloudy": "alternative", "raining": "blues", "freezing": "classical", "cold": "rock", "nice": "rap", "warm": "folk", "hot" :"latin"}
+conditions = {"snowing": "christmas", "cloudy": "alternative pop/rock", "raining": "blues", "freezing": "classical", "cold": "rock", "nice": "rap", "warm": "folk", "hot" :"latin"}
 
 for i in conditions:
     q = "INSERT INTO weather VALUES('%s','%s')"%(i,conditions[i])
