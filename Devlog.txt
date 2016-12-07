@@ -22,3 +22,6 @@ worked on account settings
 
 KateJ -- 2016-12-6 19:00-22:00
 worked on css, html, templates, and bootstrap
+
+ShamaulD -- 2016-12-6 20:00-22:00
+worked on location based functions in app (and forgot to push!)
