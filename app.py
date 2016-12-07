@@ -68,17 +68,30 @@ def logout():
     return redirect(url_for("login"))
 
 @app.route("/search/", methods=["GET"])
-def search():
-    #check which button they picked
-    #if request.args["find_me"]
-    #   use maps api to locate person// maybe database?
-    #elif request.args["enter_city"]
+def search_cities():
+    # for input of a city, returns a psuedo search page
+    # ARGUMENT IS A DICT
     #  f = city_list.db or whatever
     #  db = sqlite3.connect(f)
     #  c = db.cursor()
-    #  q = "SELECT city from cities"
-    #  c.execute(q)
+    #  d = {}
+    #  q = "SELECT city, cityid from cities"
+    #  l = c.execute(q)
+    #  for place in l:
+    #     if request.args["city"] in place[0]:
+    #         d[place[0]] = place[1]
+    # return d // would allow you to take dict and format it so user can pick
     return render_template("search.html")
+
+@app.route("/find_me/")
+def find_me():
+    # for find_me button, grabs location from google api and gives you music
+    return render_template("main.html") #argument of song?
+
+@app.route("/choose/")
+def choose():
+    return render_template("main.html") # argument of song?
+    # could clean up later once main() function gets cleared up
 
 if __name__ == "__main__":
     app.debug = True
