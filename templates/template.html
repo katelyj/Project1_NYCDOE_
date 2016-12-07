@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+  
+  <head>
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="/static/style/style.css">
+
+    <!-- use utf-8 chars -->
+    <meta charset="utf-8">
+    <!-- look pretty on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- main bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 2 bootstrap things we're using -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+  </head>
+
+
+  <body>
+
+    <!-- bootstrapName customName textAlign -->
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> 
+	  </button>
+	  <a class="navbar-brand" href="#">Radioing! In the Rain</a>
+	</div>
+	<div class="collapse navbar-collapse" id="myNavbar">
+	  <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://google.com/">Saved Songs</a></li>
+            <li><a href="https://google.com">Account Settings</a></li>
+            <li><a href="https://www.google.com/">Login</a></li>
+	  </ul>
+	</div>
+      </div>
+    </nav>
+    
+    {% block content %}
+
+    {% endblock %}
+	
+  </body>
+
+
+</html>
+
