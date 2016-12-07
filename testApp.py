@@ -7,7 +7,7 @@ app.secret_key = '<j\x9ch\x80+\x0b\xd2\xb6\n\xf7\x9dj\xb8\x0fmrO\xce\xcd\x19\xd4
 
 @app.route("/")
 def default():
-    return render_template("search.html")
+    return render_template("streamingPage.html")
 
 if __name__ == "__main__":
     app.debug = True
