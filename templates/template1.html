@@ -26,10 +26,59 @@
 
       body {
 
+      padding:20px;
       background-color: #000080;
       background-image: url("http://i66.tinypic.com/2mfejt.jpg");
       background-attachment: fixed;
+      text-align: center;
       
+      }
+
+      #heading {
+      text-align: center;
+      color: #4285F4;
+      font-size: 300%;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      line-height: 2;
+      }
+
+      .bs-float-label {
+      position:relative;
+      border:1px solid #lightsteelblue;
+      margin:10px;
+      padding:10px;
+      background-color: rgba(100,50,200,0.4);
+      }
+
+      .bs-float-label > .float-input {margin-top:10px;}
+      .bs-float-label > .float-input:focus {
+      }
+
+      .bs-float-label > .float-label {
+      position:absolute; 
+      top:3px; 
+      left:10px; 
+      background: lightsteelblue; 
+      -webkit-transition: top .5s ease-in-out, opacity .5s ease-in-out;
+      transition: top .5s ease-in-out, opacity .5s ease-in-out;
+      opacity:0;
+      }
+
+      .bs-float-label > .float-label.show { color:#2BBBAD; top:1px; opacity:1; }
+      .bs-float-label > .float-label.on { color:blue; }
+
+      div.transbox {
+      margin: 15px;
+      background-color: #2BBBAD;
+      border: 1px solid black;
+      opacity: 0.6;
+      filter: alpha(opacity=60); /* For IE8 and earlier */
+      }
+
+      div.transbox p {
+      margin: 2%;
+      font-weight: bold;
+      color: #000000;
       }
       
     </style>
@@ -39,8 +88,8 @@
 
   
   <body>
-
     
+
     {% block content %}
 
     {% endblock %}
