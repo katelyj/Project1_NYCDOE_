@@ -39,33 +39,50 @@ def checkLogin(username,password):
             else: return "Incorrect Password"
     return "Incorrect Username"
 
+def checkPass(password):
+    hashedPass = hashlib.sha1(password).hexdigest()
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    query = "SELECT * FROM users"
+    dbUserPass = c.execute(query)
+    for entry in dbUserPass:
+        if (entry[1] == hashedPass): return ""
+    return "You entered an incorrect password"
+
 @app.route("/")
-@app.route("/homepage/")
-def home():
-    if "user" not in session:
-        return redirect(url_for("login"))
-    return render_template("homepageTemplate.html")
+@app.route("/main/")
+def main():
+    return render_template("main.html")
 
 @app.route("/login/", methods = ["GET","POST"])
 def login():
     if "user" in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("main"))
     if request.method == "GET":
-        return render_template("loginTemplate.html", status = "")
+        return render_template("login.html", status = "")
     if request.form["enter"] == "Register":
         register_message = register(request.form["user"],request.form["pass"])
-        return render_template("loginTemplate.html", status = register_message)
+        return render_template("login.html", status = register_message)
     if request.form["enter"] == "Login":
         login_message = checkLogin(request.form["user"],request.form["pass"])
         if (login_message == ""):
             session["user"] = request.form["user"]
-            return redirect(url_for("home"))
-        return render_template("loginTemplate.html", status = login_message)
+            return redirect(url_for("main"))
+        return render_template("login.html", status = login_message)
 
 @app.route("/logout/")
 def logout():
     session.pop("user")
     return redirect(url_for("login"))
+
+@app.route("/accountsettings/", methods = ["POST"])
+def accountsettings():
+    if "user" not in session:
+        return redirect(url_for("main"))
+    if request.method["nasspassSubmit"] == "Change Password": #fix this
+        pass_message = checkPass(request.form["oldpass"])
+        return render_template("accountSettings.html", status = pass_message)
+    return render_template("accountSettings.html")
 
 @app.route("/search/", methods=["GET"])
 def search_cities():
