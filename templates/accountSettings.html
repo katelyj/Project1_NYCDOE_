@@ -1,22 +1,26 @@
 {% extends "template.html" %}
 
-{% block content %}
+{% block title %}
 
-<h1>Page</h1>
-
-{% endblock %}
-
-
-
-{% block content %}
-<form>
-Change Password <br>
-
-Old Password: <input type = "password" name = "oldpass"> <br>
-New Password: <input type = "password" name = "newpass"> <br>
-<input type = "submit" value = "Change Password" name = "newpassSubmit">
-
-</form>
+Settings
 
 {% endblock %}
 
+
+
+{% block content %}
+
+
+<h1 id="heading">Account Settings</h1><br>
+
+<div class="section">
+  <form>
+    Change Password <br>
+    Old Password: <input type = "password" name = "oldpass"> <br>
+    New Password: <input type = "password" name = "newpass"> <br>
+    <input type = "submit" value = "Change Password" name = "newpassSubmit">
+  </form>
+</div>
+
+
+{% endblock %}

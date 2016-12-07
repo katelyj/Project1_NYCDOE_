@@ -1,14 +1,28 @@
 {% extends "template.html" %}
 
+{% block title %}
+
+Login
+
+{% endblock %}
+
+
+
 {% block content %}
 
-<center> <h1> {{status}} </h1> </center>
 
-<form action = "/login/" method = "POST">
-  Username: <input type = "text" name = "user" placeholder = "user"> <br>
-  Password: <input type = "password" name = "pass"> <br>
-  <input type = "submit" value = "Login" name = "enter">
-  <input type = "submit" value = "Register" name = "enter">
-</form><br><br>
+<h1 id="heading">{{status}}</h1><br>
+
+<div class="section">
+
+  <form action = "/login/" method = "POST">
+    Username: <input type = "text" name = "user" placeholder = "user"> <br>
+    Password: <input type = "password" name = "pass"> <br>
+    <input type = "submit" value = "Login" name = "enter">
+    <input type = "submit" value = "Register" name = "enter">
+  </form><br><br>
+  
+</div>
+
 
 {% endblock %}
