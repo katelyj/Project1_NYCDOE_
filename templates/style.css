@@ -9,9 +9,15 @@ body { /* overall */
    turquoise: 60E1E0 -- USED
    yellow: ECC30B */
 
-    color: black;
+    color: lightsteelblue;
     background-color: #8EB8E5;
 
+}
+
+
+.navbar-custom {
+    color: #FFFFFF;
+    background-color: #CC3333;
 }
 
 

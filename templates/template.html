@@ -4,9 +4,12 @@
 
   
   <head>
-    <title>{% block title %} {% endblock %}</title>
-    <link rel="stylesheet" href="/static/style/style.css">
 
+    
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <title>{% block title %} {% endblock %}</title>
+
+    
     <!-- use utf-8 chars -->
     <meta charset="utf-8">
     <!-- look pretty on mobile -->
@@ -16,38 +19,87 @@
     <!-- 2 bootstrap things we're using -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    
+    <!-- a place for all of your regular css stuff -->
+
+    <style>
+
+      body {
+
+      <!-- Color scheme:
+	   grey: 6B7F82
+	   light blue: 8EB8E5
+	   magenta: 9E788F
+	   purple: 49306B
+	   bright blue: 4D6CFA
+	   turquoise: 60E1E0
+	   yellow: ECC30B -->
+
+      color: black;
+      background-color: #8EB8E5;
+      
+      }
+
+
+      .stream {
+      background-color: #4D6CFA;
+      }
+
+
+      .stream:hover {
+      background-color: #60E1E0;
+      }
+
+
+      .forecast {
+      background-color: #4D6CFA;
+      }
+
+
+      .forecast:hover {
+      background-color: #60E1E0;
+      }
+
+
+      #heading {
+      color: #49306B;
+      text-align: center;
+      font-style: italic;
+      font-size: 125%;
+      text-shadow: -1px 0 #B8CDF8, 0 1px #B8CDF8, 1px 0 #B8CDF8, 0 -1px #B8CDF8;
+      }
+      
+    </style>
+
     
   </head>
 
 
   <body>
 
-    <!-- bootstrapName customName textAlign -->
-
-    <nav class="navbar navbar-default">
-      <div class="container">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+      <div class="container-fluid">
 	<div class="navbar-header">
-	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span> 
-	  </button>
-	  <a class="navbar-brand" href="#">Radioing! In the Rain</a>
+	  <a class="navbar-brand" href="/">Radioing! In the Rain</a>
 	</div>
-	<div class="collapse navbar-collapse" id="myNavbar">
-	  <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://google.com/">Saved Songs</a></li>
-            <li><a href="https://google.com">Account Settings</a></li>
-            <li><a href="https://www.google.com/">Login</a></li>
-	  </ul>
-	</div>
+	<ul class="nav navbar-nav">
+	  <li class="active"><a href="/">Home</a></li>
+	  <li><a href="/">Saved Songs</a></li>
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+	  <li><a href="/"><span class="glyphicon glyphicon-user"></span> Account Settings</a></li>
+	  <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	</ul>
       </div>
     </nav>
+
     
     {% block content %}
 
     {% endblock %}
-	
+
+    
   </body>
 
 
