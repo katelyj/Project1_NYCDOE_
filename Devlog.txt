@@ -20,3 +20,5 @@ MichaelW -- 2016-12-6 During Class
 created Saved Songs database
 worked on account settings
 
+KateJ -- 2016-12-6 19:00-22:00
+worked on css, html, templates, and bootstrap
