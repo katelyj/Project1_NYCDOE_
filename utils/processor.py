@@ -1,5 +1,4 @@
-import sqlite3
-import urllib2
+import sqlite3, urllib2, spotipy
 
 
 special = ['snowing','raining','cloudy']
@@ -25,14 +24,26 @@ def tempCondition(temp):
         return "warm"
     return "hot"
 
-def getTracks(genre, number):
+def getTracks(givenGenre, number):
     #if there is an error, you have to listen to blues
     #b/c you make me sad
-    if genre not in genreList:
-        genre = "blues"
-    #sample = "5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"
-    sample = "3rgsDhGHZxZ9sB9DQWQfuf"
-    return sample
+    if givenGenre not in genreList:
+        givenGenre = "blues"
+    trackList = []
+    #while len(trackList < number):
+    #    getNewTrack(genre)
+    #trackString = ""
+    #for i in trackList:
+    #    trackString += i + ","
+    sample = "5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"
+    spotify = spotipy.Spotify()
+
+    searchRet = spotify.search("genre:"+givenGenre, limit=number, offset=0, type='track')
+    trackList = searchRet['tracks']['items']
+    tracks = ""
+    for i in trackList:
+        tracks += i['id'] + ","
+    return tracks
 
 def main(condition, temp):
 
@@ -49,8 +60,6 @@ def main(condition, temp):
     genre = genre[0][0]
 
     db.close()  #close database
-    #debugging only
-    print genre
     tracks = getTracks(genre, 5)
     url = urlStart + genre + ":" + tracks + urlEnd
     return url

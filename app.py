@@ -134,7 +134,7 @@ def choose():
 
 @app.route("/stream/")
 def song():
-    url = processor.main('blues',45)
+    url = processor.main('snowing',45)
     return render_template('streamingPage.html', url = url)
 
 if __name__ == "__main__":
