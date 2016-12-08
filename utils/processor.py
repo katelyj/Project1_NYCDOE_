@@ -3,7 +3,7 @@ import urllib2
 
 
 special = ['snowing','raining','cloudy']
-genreList = ["christmas","alternative pop/rock", "blues", "classical", "rock", "rap", "folk", "latin"}]
+genreList = ["christmas","alternative pop/rock", "blues", "classical", "rock", "rap", "folk", "latin"]
 
 #functional part
 urlStart = "https://embed.spotify.com/?uri=spotify:user:spotify:trackset:" #+ tracks and title of playlist
@@ -31,7 +31,7 @@ def getTracks(genre, number):
     #b/c you make me sad
     if genre not in genreList:
         genre = "blues"
-        return "5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"
+    return "5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"
 
 def main(condition, temp):
 
@@ -39,7 +39,7 @@ def main(condition, temp):
         condition = tempCondition(temp)
 
         #db stuff
-        f="weather.db"
+        f="database.db"
         db = sqlite3.connect(f) #open if f exists, otherwise create
         c = db.cursor()    #facilitate db ops
 
@@ -50,11 +50,9 @@ def main(condition, temp):
         db.close()  #close database
         #debugging only
         print genre
-        <<<<<<< HEAD:utils/processor.py
         tracks = getTracks(genre, 5)
         url = urlStart + genre + ":" + tracks + urlEnd
         return url
-        =======
         return genre
 
 
@@ -74,7 +72,6 @@ main("","")
 
 def getLat():
     l = urlib2.urlopen("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBWbZpAXvGSbfDOaGmPql0T3NM-0N5PvHY")
-    >>>>>>> 044453306931771a7e20decd94824000189da3a2:processor.py
 
 def getLat():
     l = urlib2.urlopen("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBWbZpAXvGSbfDOaGmPql0T3NM-0N5PvHY")
