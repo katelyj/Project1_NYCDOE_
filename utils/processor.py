@@ -1,4 +1,4 @@
-import sqlite3, urllib2, spotipy
+import sqlite3, urllib2, spotipy, random
 
 
 special = ['snowing','raining','cloudy']
@@ -6,6 +6,7 @@ genreList = ["christmas","alternative pop/rock", "blues", "classical", "rock", "
 
 #functional part
 urlStart = "https://embed.spotify.com/?uri=spotify:trackset:"
+#pretty part
 urlEnd = "&theme=white&view=coverart"
 
 
@@ -25,24 +26,26 @@ def tempCondition(temp):
     return "hot"
 
 def getTracks(givenGenre, number):
+
     #if there is an error, you have to listen to blues
     #b/c you make me sad
     if givenGenre not in genreList:
         givenGenre = "blues"
-    trackList = []
-    #while len(trackList < number):
-    #    getNewTrack(genre)
-    #trackString = ""
-    #for i in trackList:
-    #    trackString += i + ","
-    sample = "5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"
-    spotify = spotipy.Spotify()
 
-    searchRet = spotify.search("genre:"+givenGenre, limit=number, offset=0, type='track')
-    trackList = searchRet['tracks']['items']
+    spotify = spotipy.Spotify()
+    trackList = []
+
+    while len(trackList) < number:
+        #NOTE: using 1000 arbitrarily; will find way to get # songs of certain
+        #genres from spotify
+        n = random.randrange(1000)
+        searchRet = spotify.search("genre:" + givenGenre, limit=1, offset=n, type='track')
+        song = searchRet['tracks']['items'][0]['id']
+        trackList.append(song)
+
     tracks = ""
     for i in trackList:
-        tracks += i['id'] + ","
+        tracks += i + ","
     return tracks
 
 def main(condition, temp):

@@ -132,6 +132,7 @@ def choose():
     return render_template("main.html") # argument of song?
     # could clean up later once main() function gets cleared up
 
+#NOTE: can give arg to song, let user choose genre
 @app.route("/stream/")
 def song():
     url = processor.main('snowing',45)
