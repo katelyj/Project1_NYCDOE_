@@ -1,6 +1,9 @@
 import sqlite3
+import urllib2
+
 
 special = ['snowing','raining','cloudy']
+
 
 #returns the temperature condition given the current temperature
 #if there is an issue w/temp, just return "nice" by default
@@ -16,6 +19,7 @@ def tempCondition(temp):
     if temp < 80:
         return "warm"
     return "hot"
+
 
 def main(condition, temp):
 
@@ -35,6 +39,7 @@ def main(condition, temp):
     print genre
     return genre
 
+
 '''
 #debugging
 print "expects holiday"
@@ -47,3 +52,7 @@ main("cloudy",100)
 print "expects rap"
 main("","")
 '''
+
+
+def getLat():
+    l = urlib2.urlopen("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBWbZpAXvGSbfDOaGmPql0T3NM-0N5PvHY")

@@ -61,9 +61,14 @@ def main():
     return render_template("main.html")
 
 
-@app.route("/home")
+@app.route("/home/")
 def home():
     return render_template("streamingPage.html")
+
+
+@app.route("/saved/")
+def save():
+    return render_template("savedSongs.html")
 
 
 @app.route("/login/", methods = ["GET","POST"])
@@ -118,8 +123,8 @@ def search_cities():
 
 @app.route("/find_me/")
 def find_me():
-    # for find_me button, grabs location from google api and gives you music
-    return render_template("main.html") #argument of song?
+    # grab location
+    return render_template("streamingPage.html") #argument of song?
 
 
 @app.route("/choose/")
