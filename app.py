@@ -2,10 +2,13 @@ from flask import Flask, render_template, request, url_for, session, redirect
 import hashlib, sqlite3
 #from utils import 
 
-f="rainDB.db"
+
+f = "rainDB.db"
+
 
 app = Flask(__name__)
 app.secret_key = '<j\x9ch\x80+\x0b\xd2\xb6\n\xf7\x9dj\xb8\x0fmrO\xce\xcd\x19\xd49\xe5S\x1f^\x8d\xb8"\x89Z'
+
 
 def register(username, password):
     db = sqlite3.connect(f)
@@ -27,6 +30,7 @@ def register(username, password):
     db.close()
     return "You are now successfully registered."
 
+
 def checkLogin(username,password):
     hashedPass = hashlib.sha1(password).hexdigest()
     db = sqlite3.connect(f)
@@ -39,6 +43,7 @@ def checkLogin(username,password):
             else: return "Incorrect Password"
     return "Incorrect Username"
 
+
 def checkPass(password):
     hashedPass = hashlib.sha1(password).hexdigest()
     db = sqlite3.connect(f)
@@ -49,10 +54,17 @@ def checkPass(password):
         if (entry[1] == hashedPass): return ""
     return "You entered an incorrect password"
 
+
 @app.route("/")
 @app.route("/main/")
 def main():
     return render_template("main.html")
+
+
+@app.route("/home")
+def home():
+    return render_template("streamingPage.html")
+
 
 @app.route("/login/", methods = ["GET","POST"])
 def login():
@@ -69,11 +81,13 @@ def login():
             session["user"] = request.form["user"]
             return redirect(url_for("main"))
         return render_template("login.html", status = login_message)
+    
 
 @app.route("/logout/")
 def logout():
     session.pop("user")
     return redirect(url_for("login"))
+
 
 @app.route("/accountsettings/", methods = ["POST"])
 def accountsettings():
@@ -83,6 +97,7 @@ def accountsettings():
         pass_message = checkPass(request.form["oldpass"])
         return render_template("accountSettings.html", status = pass_message)
     return render_template("accountSettings.html")
+
 
 @app.route("/search/", methods=["GET"])
 def search_cities():
@@ -100,15 +115,18 @@ def search_cities():
     # return d // would allow you to take dict and format it so user can pick
     return render_template("search.html")
 
+
 @app.route("/find_me/")
 def find_me():
     # for find_me button, grabs location from google api and gives you music
     return render_template("main.html") #argument of song?
 
+
 @app.route("/choose/")
 def choose():
     return render_template("main.html") # argument of song?
     # could clean up later once main() function gets cleared up
+    
 
 if __name__ == "__main__":
     app.debug = True
