@@ -31,3 +31,11 @@ Finished up css and bootstrap
 
 KateJ -- 2016-12-7 18:30-20:00
 Worked on routing and latitude/longitude api
+
+VannaM -- 2016-12-7 19:30-21:30
+Fixed databases
+Spotify Player button plays songs of proper genre
+Known Bugs:
+1-Spotify Player is stupid (you have to play in new window)
+2-Songs aren't random
+3-Using spotipy
