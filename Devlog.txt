@@ -39,3 +39,7 @@ Known Bugs:
 1-Spotify Player is stupid (you have to play in new window)
 2-Songs aren't random
 3-Using spotipy
+
+VannaM -- 2016-12-7: 22:00-22:26
+added randomness
+added todo next comments (under NOTE:)
