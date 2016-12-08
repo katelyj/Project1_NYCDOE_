@@ -28,3 +28,6 @@ worked on location based functions in app (and forgot to push!)
 
 KateJ -- 2016-12-7 During Class
 Finished up css and bootstrap
+
+KateJ -- 2016-12-7 18:30-20:00
+Worked on routing and latitude/longitude api
