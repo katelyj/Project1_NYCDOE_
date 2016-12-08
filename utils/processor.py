@@ -49,20 +49,23 @@ def getTracks(givenGenre, number):
     return tracks
 
 def main(condition, temp):
+    if condition in genre:
+        genre = condition
+    else:
+        if condition not in special:
+            condition = tempCondition(temp)
 
-    if condition not in special:
-        condition = tempCondition(temp)
+        #db stuff
+        f="database.db"
+        db = sqlite3.connect(f) #open if f exists, otherwise create
+        c = db.cursor()    #facilitate db ops
 
-    #db stuff
-    f="database.db"
-    db = sqlite3.connect(f) #open if f exists, otherwise create
-    c = db.cursor()    #facilitate db ops
+        query = "SELECT genre FROM weather WHERE mode='%s'"%(condition)
+        genre = c.execute(query).fetchall()
+        genre = genre[0][0]
 
-    query = "SELECT genre FROM weather WHERE mode='%s'"%(condition)
-    genre = c.execute(query).fetchall()
-    genre = genre[0][0]
+        db.close()  #close database
 
-    db.close()  #close database
     tracks = getTracks(genre, 5)
     url = urlStart + genre + ":" + tracks + urlEnd
     return url
