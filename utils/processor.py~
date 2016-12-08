@@ -49,7 +49,7 @@ def getTracks(givenGenre, number):
     return tracks
 
 def main(condition, temp):
-    if condition in genreList:
+    if condition in genre:
         genre = condition
     else:
         if condition not in special:
