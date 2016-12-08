@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, session, redirect
 import hashlib, sqlite3
-#from utils import 
+from utils import processor
 
 
 f = "rainDB.db"
@@ -86,7 +86,7 @@ def login():
             session["user"] = request.form["user"]
             return redirect(url_for("main"))
         return render_template("login.html", status = login_message)
-    
+
 
 @app.route("/logout/")
 def logout():
@@ -131,7 +131,11 @@ def find_me():
 def choose():
     return render_template("main.html") # argument of song?
     # could clean up later once main() function gets cleared up
-    
+
+@app.route("/stream/")
+def song():
+    url = processor.main('blues',45)
+    render_template('streamingPage.html', url = url)
 
 if __name__ == "__main__":
     app.debug = True
