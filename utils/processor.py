@@ -6,8 +6,7 @@ special = ['snowing','raining','cloudy']
 genreList = ["christmas","alternative pop/rock", "blues", "classical", "rock", "rap", "folk", "latin"]
 
 #functional part
-urlStart = "https://embed.spotify.com/?uri=spotify:user:spotify:trackset:" #+ tracks and title of playlist
-#aesthetic part
+urlStart = "https://embed.spotify.com/?uri=spotify:trackset:"
 urlEnd = "&theme=white&view=coverart"
 
 
@@ -31,29 +30,30 @@ def getTracks(genre, number):
     #b/c you make me sad
     if genre not in genreList:
         genre = "blues"
-    return "5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"
+    #sample = "5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"
+    sample = "3rgsDhGHZxZ9sB9DQWQfuf"
+    return sample
 
 def main(condition, temp):
 
     if condition not in special:
         condition = tempCondition(temp)
 
-        #db stuff
-        f="database.db"
-        db = sqlite3.connect(f) #open if f exists, otherwise create
-        c = db.cursor()    #facilitate db ops
+    #db stuff
+    f="database.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()    #facilitate db ops
 
-        query = "SELECT genre FROM weather WHERE mode='%s'"%(condition)
-        genre = c.execute(query).fetchall()
-        genre = genre[0][0]
+    query = "SELECT genre FROM weather WHERE mode='%s'"%(condition)
+    genre = c.execute(query).fetchall()
+    genre = genre[0][0]
 
-        db.close()  #close database
-        #debugging only
-        print genre
-        tracks = getTracks(genre, 5)
-        url = urlStart + genre + ":" + tracks + urlEnd
-        return url
-        return genre
+    db.close()  #close database
+    #debugging only
+    print genre
+    tracks = getTracks(genre, 5)
+    url = urlStart + genre + ":" + tracks + urlEnd
+    return url
 
 
 '''
