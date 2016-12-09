@@ -5,6 +5,10 @@ f="database.db"
 db = sqlite3.connect(f) #open if f exists, otherwise create
 c = db.cursor()    #facilitate db ops
 
+q = "CREATE TABLE users (user TEXT, pass TEXT)"
+c.execute(q)
+
+
 q = "CREATE TABLE SavedSongs (songid INT, user TEXT, cityid INT)"
 c.execute(q)
 

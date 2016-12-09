@@ -11,11 +11,11 @@ Settings
 {% block content %}
 
 
-<h1 id="heading">Account Settings</h1><br>
+<h1 id="heading">Account Settings<br>{{status}}</h1><br>
 
 <div class="transbox">
   
-  <form>
+  <form method = "POST">
     Change Password <br>
     Old Password: <input type = "password" name = "oldpass"> <br>
     New Password: <input type = "password" name = "newpass"> <br>

@@ -3,7 +3,7 @@ import hashlib, sqlite3
 from utils import processor
 
 
-f = "rainDB.db"
+f = "database.db"
 
 
 app = Flask(__name__)
@@ -11,6 +11,8 @@ app.secret_key = '<j\x9ch\x80+\x0b\xd2\xb6\n\xf7\x9dj\xb8\x0fmrO\xce\xcd\x19\xd4
 
 
 def register(username, password):
+    if (username=="" or password==""): return "Please fill in the username and password field"
+
     db = sqlite3.connect(f)
     c = db.cursor()
     query = "SELECT user FROM users"
@@ -44,15 +46,24 @@ def checkLogin(username,password):
     return "Incorrect Username"
 
 
-def checkPass(password):
-    hashedPass = hashlib.sha1(password).hexdigest()
+def changePass(username,oldpass,newpass):
+    hashedOldPass = hashlib.sha1(oldpass).hexdigest()
+    hashedNewPass = hashlib.sha1(newpass).hexdigest()
     db = sqlite3.connect(f)
     c = db.cursor()
+    d = db.cursor()
     query = "SELECT * FROM users"
     dbUserPass = c.execute(query)
     for entry in dbUserPass:
-        if (entry[1] == hashedPass): return ""
-    return "You entered an incorrect password"
+        if (entry[0] == username):
+            if (entry[1] == hashedOldPass):
+
+                updateQuery = "UPDATE users SET pass = \'%s\' WHERE user = \'%s\'"%(hashedNewPass,username)
+                d.execute(updateQuery)
+                db.commit()
+                db.close()
+                return "You have successfully changed your password"
+            else: return "You entered an incorrect password"
 
 
 def loggedIn():
@@ -109,12 +120,12 @@ def accountsettings():
     if "user" not in session:
         return redirect(url_for("home"))
     
-    if request.method["newpassSubmit"] == "Change Password":
-        pass_message = checkPass(request.form["oldpass"])
-        return render_template("accountSettings.html", status = pass_message, userStatus=loggedIn())
-    
-    return render_template("accountSettings.html", userStatus=loggedIn())
+    if request.method =="GET":
+        return render_template("accountSettings.html", userStatus=loggedIn())
 
+    else: pass_message = changePass(session["user"],request.form["oldpass"],request.form["newpass"])
+    return render_template("accountSettings.html", status = pass_message, userStatus=loggedIn())
+    
 
 @app.route("/search/", methods=["GET", "POST"])
 def search_cities():
