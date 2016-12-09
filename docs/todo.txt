@@ -1,5 +1,8 @@
 TO DO LIST:
 
 - Finding location
+- Saved songs
+- Music
 - Like all the API stuff lol
-
+- Update README
+- Design changes document
