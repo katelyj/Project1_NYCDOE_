@@ -25,6 +25,7 @@ def tempCondition(temp):
         return "warm"
     return "hot"
 
+
 def getTracks(givenGenre, number):
 
     #if there is an error, you have to listen to blues
@@ -47,6 +48,7 @@ def getTracks(givenGenre, number):
     for i in trackList:
         tracks += i + ","
     return tracks
+
 
 def main(condition, temp):
     if condition in genreList:
@@ -87,6 +89,4 @@ main("","")
 
 def getLat():
     l = urlib2.urlopen("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBWbZpAXvGSbfDOaGmPql0T3NM-0N5PvHY")
-
-def getLat():
-    l = urlib2.urlopen("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBWbZpAXvGSbfDOaGmPql0T3NM-0N5PvHY")
+    #???

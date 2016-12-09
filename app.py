@@ -104,7 +104,7 @@ def accountsettings():
     return render_template("accountSettings.html")
 
 
-@app.route("/search/", methods=["GET"])
+@app.route("/search/", methods=["GET", "POST"])
 def search_cities():
     # for input of a city, returns a psuedo search page
     # ARGUMENT IS A DICT
@@ -132,11 +132,13 @@ def choose():
     return render_template("main.html") # argument of song?
     # could clean up later once main() function gets cleared up
 
+    
 #NOTE: can give arg to song, let user choose genre
 @app.route("/stream/")
 def song():
     url = processor.main('snowing',45)
     return render_template('streamingPage.html', url = url)
+
 
 if __name__ == "__main__":
     app.debug = True
