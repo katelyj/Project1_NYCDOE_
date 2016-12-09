@@ -52,3 +52,6 @@ Fixed routing on navbar, added logging out mechanism, fixed small bugs
 
 MichaelW -- 2016-12-8 21:00-23:00
 fixed account settings
+
+VannaM -- 2016-12-8 in class
+started to fix playing fxn
