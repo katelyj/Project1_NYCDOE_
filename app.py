@@ -11,7 +11,7 @@ app.secret_key = '<j\x9ch\x80+\x0b\xd2\xb6\n\xf7\x9dj\xb8\x0fmrO\xce\xcd\x19\xd4
 
 
 def register(username, password):
-    if (username=="" or password==""): return "Please fill in the username and password field"
+    if (username=="" or password==""): return "Please fill in the username and password fields"
 
     db = sqlite3.connect(f)
     c = db.cursor()
@@ -47,6 +47,7 @@ def checkLogin(username,password):
 
 
 def changePass(username,oldpass,newpass):
+    if (oldpass=="" or newpass==""): return "Please fill in both password fields"
     hashedOldPass = hashlib.sha1(oldpass).hexdigest()
     hashedNewPass = hashlib.sha1(newpass).hexdigest()
     db = sqlite3.connect(f)
