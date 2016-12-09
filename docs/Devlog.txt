@@ -8,7 +8,7 @@ We started to develop our idea, and create a thorough design document.
 Which APIs are we using???
 FIND OUT NEXT TIME!
 
-MichaelW -- 2016-12-5
+MichaelW -- 2016-12-5 00:00-01:00
 finished working login/register system
 some html with no css
 
@@ -49,3 +49,6 @@ Fixed webplayer
 
 KateJ -- 2016-12-8 19:45-20:40
 Fixed routing on navbar, added logging out mechanism, fixed small bugs
+
+MichaelW -- 2016-12-8 21:00-23:00
+fixed account settings
