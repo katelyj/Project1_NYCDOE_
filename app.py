@@ -85,6 +85,8 @@ def home():
 
 @app.route("/saved/")
 def save():
+    if "user" not in session:
+        return redirect(url_for("error"))
     return render_template("savedSongs.html", userStatus=loggedIn())
 
 
@@ -109,22 +111,32 @@ def login():
         return render_template("login.html", status = login_message, userStatus=loggedIn())
 
 
+@app.route("/error/", methods = ["POST", "GET"])
+def error():
+    return render_template("error.html", userStatus=loggedIn())
+
+
 @app.route("/logout/")
 def logout():
     session.pop("user")
-    return redirect(url_for("login"))
+    return redirect(url_for("home"))
 
 
 @app.route("/accountsettings/", methods = ["POST", "GET"])
 def accountsettings():
     if "user" not in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("error"))
     
     if request.method =="GET":
         return render_template("accountSettings.html", userStatus=loggedIn())
 
     else: pass_message = changePass(session["user"],request.form["oldpass"],request.form["newpass"])
     return render_template("accountSettings.html", status = pass_message, userStatus=loggedIn())
+
+
+@app.route("/update/", methods = ["POST", "GET"])
+def updateLocation():
+    return redirect(url_for("main"))
     
 
 @app.route("/search/", methods=["GET", "POST"])
