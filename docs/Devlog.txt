@@ -55,3 +55,6 @@ fixed account settings
 
 VannaM -- 2016-12-8 in class
 started to fix playing fxn
+
+KateJ -- 2016-12-9 In class
+If you're not logged in, you can no longer access account settings or saved songs (added an error message)
