@@ -55,6 +55,12 @@ def checkPass(password):
     return "You entered an incorrect password"
 
 
+def loggedIn():
+    if "user" in session:
+        return "Logout"
+    return "Login"
+
+
 @app.route("/")
 @app.route("/main/")
 def main():
@@ -63,29 +69,33 @@ def main():
 
 @app.route("/home/")
 def home():
-    return render_template("streamingPage.html")
+    return render_template("streamingPage.html", userStatus=loggedIn())
 
 
 @app.route("/saved/")
 def save():
-    return render_template("savedSongs.html")
+    return render_template("savedSongs.html", userStatus=loggedIn())
 
 
 @app.route("/login/", methods = ["GET","POST"])
 def login():
     if "user" in session:
-        return redirect(url_for("home"))
+        return logout()
+    
     if request.method == "GET":
-        return render_template("login.html", status = "")
+        return render_template("login.html", status = "", userStatus=loggedIn())
+    
     if request.form["enter"] == "Register":
         register_message = register(request.form["user"],request.form["pass"])
-        return render_template("login.html", status = register_message)
+        return render_template("login.html", status = register_message, userStatus=loggedIn())
+    
     if request.form["enter"] == "Login":
         login_message = checkLogin(request.form["user"],request.form["pass"])
         if (login_message == ""):
             session["user"] = request.form["user"]
             return redirect(url_for("home"))
-        return render_template("login.html", status = login_message)
+        
+        return render_template("login.html", status = login_message, userStatus=loggedIn())
 
 
 @app.route("/logout/")
@@ -98,10 +108,12 @@ def logout():
 def accountsettings():
     if "user" not in session:
         return redirect(url_for("home"))
-    if request.method["nasspassSubmit"] == "Change Password": #fix this
+    
+    if request.method["newpassSubmit"] == "Change Password":
         pass_message = checkPass(request.form["oldpass"])
-        return render_template("accountSettings.html", status = pass_message)
-    return render_template("accountSettings.html")
+        return render_template("accountSettings.html", status = pass_message, userStatus=loggedIn())
+    
+    return render_template("accountSettings.html", userStatus=loggedIn())
 
 
 @app.route("/search/", methods=["GET", "POST"])
@@ -124,7 +136,7 @@ def search_cities():
 @app.route("/find_me/")
 def find_me():
     # grab location
-    return render_template("streamingPage.html") #argument of song?
+    return render_template("streamingPage.html", userStatus=loggedIn()) #argument of song?
 
 
 @app.route("/choose/")
@@ -137,7 +149,7 @@ def choose():
 @app.route("/stream/")
 def song():
     url = processor.main('snowing',45)
-    return render_template('streamingPage.html', url = url)
+    return render_template('streamingPage.html', url = url, userStatus=loggedIn())
 
 
 if __name__ == "__main__":

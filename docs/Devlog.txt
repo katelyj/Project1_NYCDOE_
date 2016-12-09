@@ -46,3 +46,6 @@ added todo next comments (under NOTE:)
 
 KateJ -- 2016-12-8 13:00-13:20
 Fixed webplayer
+
+KateJ -- 2016-12-8 19:45-20:40
+Fixed routing on navbar, added logging out mechanism, fixed small bugs
