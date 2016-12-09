@@ -1,0 +1,6 @@
+TO DO LIST:
+
+- Registering with blank fields? Should not be allowed.
+- Finding location
+- Like all the API stuff lol
+

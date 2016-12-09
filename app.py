@@ -74,7 +74,7 @@ def save():
 @app.route("/login/", methods = ["GET","POST"])
 def login():
     if "user" in session:
-        return redirect(url_for("main"))
+        return redirect(url_for("home"))
     if request.method == "GET":
         return render_template("login.html", status = "")
     if request.form["enter"] == "Register":
@@ -84,7 +84,7 @@ def login():
         login_message = checkLogin(request.form["user"],request.form["pass"])
         if (login_message == ""):
             session["user"] = request.form["user"]
-            return redirect(url_for("main"))
+            return redirect(url_for("home"))
         return render_template("login.html", status = login_message)
 
 
@@ -94,10 +94,10 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/accountsettings/", methods = ["POST"])
+@app.route("/accountsettings/", methods = ["POST", "GET"])
 def accountsettings():
     if "user" not in session:
-        return redirect(url_for("main"))
+        return redirect(url_for("home"))
     if request.method["nasspassSubmit"] == "Change Password": #fix this
         pass_message = checkPass(request.form["oldpass"])
         return render_template("accountSettings.html", status = pass_message)
