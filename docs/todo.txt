@@ -1,7 +1,6 @@
 TO DO LIST:
 
-- Registering with blank fields? Should not be allowed.
-- Account settings just straight up does not work
+- Registering with blank fields? Should not be allowed. (login done. forgot implement in account settings)
 - Finding location
 - Like all the API stuff lol
 
