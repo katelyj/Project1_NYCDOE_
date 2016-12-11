@@ -1,4 +1,6 @@
-import subprocess, spotipy, urllib2, os
+import spotipy, urllib2, os
+from playsound import playsound
+
 
 spotify = spotipy.Spotify()
 
@@ -12,14 +14,8 @@ data = f.read()
 with open("song.mp3", "wb") as code:
     code.write(data)
 
-#change to wav
-subprocess.call(['ffmpeg', '-i', 'song.mp3', 'song.wav'])
-
-audio_file = "song.wav"
 
 #play
-return_code = subprocess.call(["afplay", audio_file])
-
+playsound('song.mp3')
 #cleanup
-os.remove("song.wav")
 os.remove("song.mp3")
