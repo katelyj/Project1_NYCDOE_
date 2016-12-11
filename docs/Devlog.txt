@@ -64,3 +64,9 @@ Module hell
 
 VannaM -- 2016-12-9 12:30-15:30
 figured out theoretical implementation of music playing
+
+VannaM -- 2016-12-9 15:50-16:20
+practical, cross-platform implementation of basic music playing
+Things to be done:
+-cannot pause/skip songs yet
+Warning: modules required: spotipy, playsound
