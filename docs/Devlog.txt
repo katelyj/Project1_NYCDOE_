@@ -58,3 +58,9 @@ started to fix playing fxn
 
 KateJ -- 2016-12-9 In class
 If you're not logged in, you can no longer access account settings or saved songs (added an error message)
+
+VannaM -- 2016-12-9 In class
+Module hell
+
+VannaM -- 2016-12-9 12:30-15:30
+figured out theoretical implementation of music playing
