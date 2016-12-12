@@ -2,7 +2,6 @@ TO DO LIST:
 
 - Finding location
 - Saved songs
-- Music
+- Music player
 - Like all the API stuff lol
-- Update README
 - Design changes document

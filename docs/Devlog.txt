@@ -70,3 +70,7 @@ practical, cross-platform implementation of basic music playing
 Things to be done:
 -cannot pause/skip songs yet
 Warning: modules required: spotipy, playsound
+
+KateJ -- 2016-12-12 In Class
+Finished README.md
+Came up with lit joke: "Knock knock!" "Who's there?" "Keyboard Interrupt." "Keyboa-" "MOO!"
