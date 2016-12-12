@@ -7,3 +7,5 @@ TO DO LIST:
 - Design changes document
 - Sign up google geolocation
 - use geolocation to get your zipcode -> weather api
+- allow input their zipcode
+- (if we have time) use geolocation to get coordinates -> weather api
