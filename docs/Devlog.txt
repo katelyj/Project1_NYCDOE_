@@ -74,3 +74,6 @@ Warning: modules required: spotipy, playsound
 KateJ -- 2016-12-12 In Class
 Finished README.md
 Came up with lit joke: "Knock knock!" "Who's there?" "Keyboard Interrupt." "Keyboa-" "MOO!"
+
+ShamaulD -- 2016-12-12 14:20-14:40
+finally understood weather api

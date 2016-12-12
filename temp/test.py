@@ -1,6 +1,6 @@
 import spotipy, urllib2, os
 from playsound import playsound
-
+import vlc
 
 spotify = spotipy.Spotify()
 
@@ -16,6 +16,8 @@ with open("song.mp3", "wb") as code:
 
 
 #play
-playsound('song.mp3')
+#playsound('song.mp3')
+p = vlc.MediaPlayer('song.mp3')
+p.play()
 #cleanup
 os.remove("song.mp3")
