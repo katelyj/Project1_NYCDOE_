@@ -7,10 +7,10 @@
 ## TO RUN:
 
 *Type into terminal (make sure you are in your virtual environment!):*
-'''
-pip install spotipy
-pip install playsound
-'''
+```
+$ pip install spotipy
+$ pip install playsound
+```
 
 ## DESCRIPTION:
 
