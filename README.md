@@ -11,6 +11,7 @@
 ```
 $ pip install spotipy
 $ pip install playsound
+$ python app.py
 ```
 
 ## DESCRIPTION:
