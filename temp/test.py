@@ -1,6 +1,6 @@
 import spotipy, urllib2, os
-from playsound import playsound
-import vlc
+import pyglet
+
 
 spotify = spotipy.Spotify()
 
@@ -15,9 +15,25 @@ with open("song.mp3", "wb") as code:
     code.write(data)
 
 
+#load into pyglet
+song = pyglet.media.load("song.mp3")
+
+#make player
+player = pyglet.media.Player()
+#load song
+player.queue(song)
+
+#set volume
+player.volume=1.0
+
 #play
-#playsound('song.mp3')
-p = vlc.MediaPlayer('song.mp3')
-p.play()
+player.play()
+
+#run
+try:
+    pyglet.app.run()
+except KeyboardInterrupt:
+    pass
+
 #cleanup
 os.remove("song.mp3")
