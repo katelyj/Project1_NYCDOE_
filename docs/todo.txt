@@ -1,11 +1,10 @@
 TO DO LIST:
 
-- Finding location
 - Saved songs
 - Music player
 - Like all the API stuff lol
 - Design changes document
-- Sign up google geolocation
-- use geolocation to get your zipcode -> weather api
 - allow input their zipcode
-- (if we have time) use geolocation to get coordinates -> weather api
+- make stuff look nice
+- get the weather using coords -> play music
+- organize site map? 
