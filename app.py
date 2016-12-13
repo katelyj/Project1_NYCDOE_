@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, session, redirect
-import hashlib, sqlite3
+import hashlib, sqlite3, json, requests
 from utils import processor
 
 
@@ -142,19 +142,13 @@ def updateLocation():
 
 @app.route("/search/", methods=["GET", "POST"])
 def search_cities():
-    # for input of a city, returns a psuedo search page
-    # ARGUMENT IS A DICT
-    #  f = city_list.db or whatever
-    #  db = sqlite3.connect(f)
-    #  c = db.cursor()
-    #  d = {}
-    #  q = "SELECT city, cityid from cities"
-    #  l = c.execute(q)
-    #  for place in l:
-    #     if request.args["city"] in place[0]:
-    #         d[place[0]] = place[1]
-    # return d // would allow you to take dict and format it so user can pick
-    return render_template("search.html")
+    send_url = 'http://freegeoip.net/json'
+    r = requests.get(send_url)
+    j = json.loads(r.text)
+    lat = j['latitude']
+    lon = j['longitude']
+    #LAT AND LON info here to be used for weather
+    return render_template("search.html", yourlat = lat, yourlon = lon)
 
 
 @app.route("/find_me/")

@@ -1,4 +1,4 @@
-import sqlite3, urllib2, spotipy, random
+import sqlite3, urllib2, spotipy, random, json
 
 
 special = ['snowing','raining','cloudy']
@@ -85,8 +85,3 @@ main("cloudy",100)
 print "expects rap"
 main("","")
 '''
-
-
-def getLat():
-    l = urlib2.urlopen("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBWbZpAXvGSbfDOaGmPql0T3NM-0N5PvHY")
-    #???
