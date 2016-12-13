@@ -77,3 +77,8 @@ Came up with lit joke: "Knock knock!" "Who's there?" "Keyboard Interrupt." "Keyb
 
 ShamaulD -- 2016-12-12 14:20-14:40
 finally understood weather api
+
+VannaM -- 2016-12-12 in class, 19:30 - 20:50
+hopes beyond hope that sound actually works this time
+new modules: pyglet and AVBin, both added to design changes doc
+still to do: testing on the dreaded linux, integrating this w/actual code
