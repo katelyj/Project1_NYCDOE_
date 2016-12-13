@@ -88,7 +88,15 @@ def home():
 def save():
     if "user" not in session:
         return redirect(url_for("error"))
-    return render_template("savedSongs.html", userStatus=loggedIn())
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    song_str = ""
+    query = "SELECT * FROM SavedSongs where user = \'%s\'"%(session["user"])
+    dbSavedSongs = c.execute(query)
+    for entry in dbSavedSongs:
+        song_str+= "<p>Song ID: %d\n City ID: %d\n</p>"%(entry[0],entry[2])
+    if (len(song_str) == 0): song_str = "You currently have no songs saved."
+    return render_template("savedSongs.html", userStatus=loggedIn(), song_html=song_str)
 
 
 @app.route("/login/", methods = ["GET","POST"])
@@ -147,8 +155,9 @@ def search_cities():
     j = json.loads(r.text)
     lat = j['latitude']
     lon = j['longitude']
+    loc_msg = "We found your location: (%s , %s)"%(lat,lon)
     #LAT AND LON info here to be used for weather
-    return render_template("search.html", yourlat = lat, yourlon = lon)
+    return render_template("search.html", status = loc_msg)
 
 
 @app.route("/find_me/")
