@@ -82,3 +82,7 @@ VannaM -- 2016-12-12 in class, 19:30 - 20:50
 hopes beyond hope that sound actually works this time
 new modules: pyglet and AVBin, both added to design changes doc
 still to do: testing on the dreaded linux, integrating this w/actual code
+
+MichaelW -- 2016-12-12 9:00-12:00
+successfuly obtains coordinates using geo ip api
+saved songs features should be working
