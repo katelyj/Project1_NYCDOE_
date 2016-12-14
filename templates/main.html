@@ -4,13 +4,16 @@
 
     <div class="container">
       <div class="row">
-	<h1 id="heading">Enter Your City...</h1>
-        
+	<h1 id="heading">Enter Your Zipcode...</h1>
+      {{status}}
+
         <form  role="form" action="/search/" method="POST">
           <div class="form-group bs-float-label">
-            <input id="float-input-1" type="text" class="form-control float-input" placeholder="Where you at?"/>
+            <input name="zipcode" id="float-input-1" type="number" class="form-control float-input" placeholder="Where you at?"/>
             <label for="float-input-1" class="float-label">Oh, that's nice</label><br>
+            <input type="submit" value="Enter">
           </div>
+
         </form>
 	
       </div>

@@ -1,4 +1,4 @@
-import sqlite3, urllib2, spotipy, random, json
+import sqlite3, urllib2, spotipy, random, json, requests
 
 
 special = ['snowing','raining','cloudy']
@@ -71,6 +71,29 @@ def main(condition, temp):
     tracks = getTracks(genre, 5)
     url = urlStart + genre + ":" + tracks + urlEnd
     return url
+
+def get_saved_songs(username):
+    f = "database.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    song_count = 0
+    song_str = ""
+    query = "SELECT * FROM SavedSongs where user = \'%s\'"%(username)
+    dbSavedSongs = c.execute(query)
+    for entry in dbSavedSongs:
+        song_str+= "<p>%s. Song ID: %d\n City ID: %d\n</p>"%(song_count, entry[0],entry[2])
+        song_count+=1
+    if (song_count == 0): song_str+= "You currently have no songs saved."
+    return song_str
+
+def get_loc_coords():
+    send_url = 'http://freegeoip.net/json'
+    r = requests.get(send_url)
+    j = json.loads(r.text)
+    lat = j['latitude']
+    lon = j['longitude']
+    return lat,lon
+
 
 
 '''

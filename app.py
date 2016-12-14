@@ -72,6 +72,11 @@ def loggedIn():
         return "Logout"
     return "Login"
 
+def checkZip(zipcode):
+    if (len(str(zipcode)) != 5): return False
+    else: return True 
+
+
 
 @app.route("/")
 @app.route("/main/")
@@ -79,7 +84,7 @@ def main():
     return render_template("main.html")
 
 
-@app.route("/home/")
+@app.route("/home/", methods = ["GET","POST"])
 def home():
     return render_template("streamingPage.html", userStatus=loggedIn())
 
@@ -87,15 +92,8 @@ def home():
 @app.route("/saved/")
 def save():
     if "user" not in session:
-        return redirect(url_for("error"))
-    db = sqlite3.connect(f)
-    c = db.cursor()
-    song_str = ""
-    query = "SELECT * FROM SavedSongs where user = \'%s\'"%(session["user"])
-    dbSavedSongs = c.execute(query)
-    for entry in dbSavedSongs:
-        song_str+= "<p>Song ID: %d\n City ID: %d\n</p>"%(entry[0],entry[2])
-    if (len(song_str) == 0): song_str = "You currently have no songs saved."
+        return redirect(url_for("login"))
+    song_str = processor.get_saved_songs(session["user"])
     return render_template("savedSongs.html", userStatus=loggedIn(), song_html=song_str)
 
 
@@ -119,22 +117,17 @@ def login():
         
         return render_template("login.html", status = login_message, userStatus=loggedIn())
 
-
-@app.route("/error/", methods = ["POST", "GET"])
-def error():
-    return render_template("error.html", userStatus=loggedIn())
-
-
 @app.route("/logout/")
 def logout():
-    session.pop("user")
+    if "user" in session: session.pop("user")
+    if "coords" in session: session.pop("coords")
     return redirect(url_for("home"))
 
 
 @app.route("/accountsettings/", methods = ["POST", "GET"])
 def accountsettings():
     if "user" not in session:
-        return redirect(url_for("error"))
+        return redirect(url_for("login"))
     
     if request.method =="GET":
         return render_template("accountSettings.html", userStatus=loggedIn())
@@ -149,15 +142,25 @@ def updateLocation():
     
 
 @app.route("/search/", methods=["GET", "POST"])
-def search_cities():
-    send_url = 'http://freegeoip.net/json'
-    r = requests.get(send_url)
-    j = json.loads(r.text)
-    lat = j['latitude']
-    lon = j['longitude']
-    loc_msg = "We found your location: (%s , %s)"%(lat,lon)
-    #LAT AND LON info here to be used for weather
-    return render_template("search.html", status = loc_msg)
+def search():
+    #zipcode
+    if "zipcode" in request.form:
+        zipcode = request.form["zipcode"]
+        #print(request.form["zipcode"])
+        #print checkZip(zipcode)
+        if(checkZip(zipcode)): 
+            session["zipcode"] = zipcode
+            return redirect(url_for("home"))
+        else:
+            return redirect(url_for("main"))#, status = "Please enter a valid zipcode") 
+
+    #coords
+    else: 
+        lat,lon = processor.get_loc_coords()
+        loc_msg = "We found your location: (%s , %s)"%(lat,lon)
+        session["coords"] = [lat,lon]
+        #print(session["coords"])
+        return render_template("search.html", status = loc_msg)
 
 
 @app.route("/find_me/")
