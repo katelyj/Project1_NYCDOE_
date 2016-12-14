@@ -10,10 +10,6 @@
 *Type into terminal (make sure you are in your virtual environment!):*
 ```
 $ pip install spotipy
-$ pip install pyglet
-
-install proper version of AVBin from here: http://avbin.github.io/AVbin/Download.html 
-
 $ python app.py
 ```
 
