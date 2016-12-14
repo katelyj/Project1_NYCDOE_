@@ -176,7 +176,7 @@ def choose():
 #NOTE: can give arg to song, let user choose genre
 @app.route("/stream/")
 def song():
-    if 'user' not in sessions:
+    if 'user' not in session:
         return redirect(url_for(main()))
     url = processor.main('snowing',45, session['user'])
     return render_template('streamingPage.html', url = url, userStatus=loggedIn())
