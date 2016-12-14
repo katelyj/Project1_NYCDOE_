@@ -1,13 +1,9 @@
-import sqlite3, urllib2, spotipy, random, json
+import sqlite3, urllib2, spotipy, random, json, os, pyglet, time
 
 
 special = ['snowing','raining','cloudy']
 genreList = ["christmas","alternative pop/rock", "blues", "classical", "rock", "rap", "folk", "latin"]
-
-#functional part
-urlStart = "https://embed.spotify.com/?uri=spotify:trackset:"
-#pretty part
-urlEnd = "&theme=white&view=coverart"
+player = pyglet.media.Player()
 
 
 #returns the temperature condition given the current temperature
@@ -41,16 +37,45 @@ def getTracks(givenGenre, number):
         #genres from spotify
         n = random.randrange(1000)
         searchRet = spotify.search("genre:" + givenGenre, limit=1, offset=n, type='track')
-        song = searchRet['tracks']['items'][0]['id']
+        song = searchRet['tracks']['items'][0]['preview_url']
         trackList.append(song)
 
-    tracks = ""
-    for i in trackList:
-        tracks += i + ","
-    return tracks
+    return trackList
 
 
-def main(condition, temp):
+def download(track, title):
+    f = urllib2.urlopen(track)
+    data = f.read()
+    with open(title, "wb") as code:
+        code.write(data)
+
+def play(trackList, user):
+
+    player.volume=1.0
+
+    n = 0
+    for track in trackList:
+        title = user + str(n) + ".mp3"
+        download(track, title)
+        song = pyglet.media.load(title)
+        player.queue(song)
+
+    player.play()
+
+    for i in range(len(trackList) - 1):
+        #pause for 30 seconds
+        time.sleep(30)
+        #next song
+        player.next_source()
+
+    try:
+        pyglet.app.run()
+    except KeyboardInterrupt:
+        pass
+
+
+
+def main(condition, temp, username):
     if condition in genreList:
         genre = condition
     else:
@@ -68,9 +93,14 @@ def main(condition, temp):
 
         db.close()  #close database
 
-    tracks = getTracks(genre, 5)
-    url = urlStart + genre + ":" + tracks + urlEnd
-    return url
+    trackList = getTracks(genre, 5)
+    title = play(trackList, username)
+
+def pause():
+    player.pause()
+
+
+
 
 
 '''
@@ -85,3 +115,5 @@ main("cloudy",100)
 print "expects rap"
 main("","")
 '''
+
+#main('snowing',25,'Vanna')
