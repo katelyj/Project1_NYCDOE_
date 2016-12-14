@@ -1,6 +1,5 @@
 {% extends "template.html" %}
 
-
 {% block title %}
 
 Home
@@ -10,13 +9,15 @@ Home
 
 {% block content %}
 
-
 <h1 id="heading">Test1</h1><br>
 
 <div class="transbox">
 
-  <!--this is the spotify player; feel free to put it in a div or etc.-->
-  <iframe src="{{ url }}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+  <!--audio objects, because html is cool-->
+  <!-- controls: pause; autoplay: autoplay; jscript: reload when finished playing -->
+  <audio controls autoplay onended="javascript:window.location.reload();">
+    <source src= {{url}} type="audio/mpeg">
+  </audio>
 
 </div>
 

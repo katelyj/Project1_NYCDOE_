@@ -74,7 +74,7 @@ def loggedIn():
 
 def checkZip(zipcode):
     if (len(str(zipcode)) != 5): return False
-    else: return True 
+    else: return True
 
 
 
@@ -147,14 +147,14 @@ def search():
         zipcode = request.form["zipcode"]
         #print(request.form["zipcode"])
         #print checkZip(zipcode)
-        if(checkZip(zipcode)): 
+        if(checkZip(zipcode)):
             session["zipcode"] = zipcode
             return redirect(url_for("home"))
         else:
-            return redirect(url_for("main"))#, status = "Please enter a valid zipcode") 
+            return redirect(url_for("main"))#, status = "Please enter a valid zipcode")
 
     #coords
-    else: 
+    else:
         lat,lon = processor.get_loc_coords()
         loc_msg = "We found your location: (%s , %s)"%(lat,lon)
         session["coords"] = [lat,lon]
@@ -176,9 +176,7 @@ def choose():
 #NOTE: can give arg to song, let user choose genre
 @app.route("/stream/")
 def song():
-    if 'user' not in session:
-        return redirect(url_for(main()))
-    url = processor.main('snowing',45, session['user'])
+    url = processor.main('snowing',45)
     return render_template('streamingPage.html', url = url, userStatus=loggedIn())
 
 

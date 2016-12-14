@@ -1,9 +1,8 @@
-import sqlite3, urllib2, spotipy, random, json, os, pyglet, time, requests
+import sqlite3, urllib2, spotipy, random, json, os
 
 
 special = ['snowing','raining','cloudy']
 genreList = ["christmas","alternative pop/rock", "blues", "classical", "rock", "rap", "folk", "latin"]
-player = pyglet.media.Player()
 
 
 #returns the temperature condition given the current temperature
@@ -22,7 +21,7 @@ def tempCondition(temp):
     return "hot"
 
 
-def getTracks(givenGenre, number):
+def getTrack(givenGenre):
 
     #if there is an error, you have to listen to blues
     #b/c you make me sad
@@ -30,52 +29,12 @@ def getTracks(givenGenre, number):
         givenGenre = "blues"
 
     spotify = spotipy.Spotify()
-    trackList = []
 
-    while len(trackList) < number:
-        #NOTE: using 1000 arbitrarily; will find way to get # songs of certain
-        #genres from spotify
-        n = random.randrange(1000)
-        searchRet = spotify.search("genre:" + givenGenre, limit=1, offset=n, type='track')
-        song = searchRet['tracks']['items'][0]['preview_url']
-        trackList.append(song)
+    n = random.randrange(1000)
+    searchRet = spotify.search("genre:" + givenGenre, limit=1, offset=n, type='track')
+    return searchRet['tracks']['items'][0]['preview_url']
 
-    return trackList
-
-
-def download(track, title):
-    f = urllib2.urlopen(track)
-    data = f.read()
-    with open(title, "wb") as code:
-        code.write(data)
-
-def play(trackList, user):
-
-    player.volume=1.0
-
-    n = 0
-    for track in trackList:
-        title = user + str(n) + ".mp3"
-        download(track, title)
-        song = pyglet.media.load(title)
-        player.queue(song)
-
-    player.play()
-
-    for i in range(len(trackList) - 1):
-        #pause for 30 seconds
-        time.sleep(30)
-        #next song
-        player.next_source()
-
-    try:
-        pyglet.app.run()
-    except KeyboardInterrupt:
-        pass
-
-
-
-def main(condition, temp, username):
+def main(condition, temp):
     if condition in genreList:
         genre = condition
     else:
@@ -93,8 +52,7 @@ def main(condition, temp, username):
 
         db.close()  #close database
 
-    trackList = getTracks(genre, 5)
-    title = play(trackList, username)
+    return getTrack(genre)
 
 def pause():
     player.pause()
@@ -125,18 +83,4 @@ def get_loc_coords():
     return lat,lon
 
 
-
-'''
-#debugging
-print "expects holiday"
-main("snowing",0)
-main("snowing",100)
-print "expects rap"
-main("",50)
-print "expects alt"
-main("cloudy",100)
-print "expects rap"
-main("","")
-'''
-
-#main('snowing',25,'Vanna')
+    return html
