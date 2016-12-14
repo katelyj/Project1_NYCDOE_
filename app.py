@@ -148,8 +148,8 @@ def updateLocation():
     return redirect(url_for("main"))
     
 
-@app.route("/search/", methods=["GET", "POST"])
-def search_cities():
+@app.route("/find_me/", methods=["GET", "POST"])
+def find_me():
     send_url = 'http://freegeoip.net/json'
     r = requests.get(send_url)
     j = json.loads(r.text)
@@ -160,9 +160,10 @@ def search_cities():
     return render_template("search.html", status = loc_msg)
 
 
-@app.route("/find_me/")
-def find_me():
+@app.route("/search/", methods=["GET"])
+def search():
     # grab location
+    zipcode = request.args["zipcode"]
     return render_template("streamingPage.html", userStatus=loggedIn()) #argument of song?
 
 
