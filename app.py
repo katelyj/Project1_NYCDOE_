@@ -101,20 +101,20 @@ def save():
 def login():
     if "user" in session:
         return logout()
-    
+
     if request.method == "GET":
         return render_template("login.html", status = "", userStatus=loggedIn())
-    
+
     if request.form["enter"] == "Register":
         register_message = register(request.form["user"],request.form["pass"])
         return render_template("login.html", status = register_message, userStatus=loggedIn())
-    
+
     if request.form["enter"] == "Login":
         login_message = checkLogin(request.form["user"],request.form["pass"])
         if (login_message == ""):
             session["user"] = request.form["user"]
             return redirect(url_for("home"))
-        
+
         return render_template("login.html", status = login_message, userStatus=loggedIn())
 
 @app.route("/logout/")
@@ -128,7 +128,6 @@ def logout():
 def accountsettings():
     if "user" not in session:
         return redirect(url_for("login"))
-    
     if request.method =="GET":
         return render_template("accountSettings.html", userStatus=loggedIn())
 
@@ -139,7 +138,7 @@ def accountsettings():
 @app.route("/update/", methods = ["POST", "GET"])
 def updateLocation():
     return redirect(url_for("main"))
-    
+
 
 @app.route("/search/", methods=["GET", "POST"])
 def search():
@@ -163,10 +162,9 @@ def search():
         return render_template("search.html", status = loc_msg)
 
 
-@app.route("/find_me/")
-def find_me():
-    # grab location
-    return render_template("streamingPage.html", userStatus=loggedIn()) #argument of song?
+#@app.route("/find_me/", methods=["GET", "POST"])
+#def find_me():
+
 
 
 @app.route("/choose/")
@@ -174,11 +172,13 @@ def choose():
     return render_template("main.html") # argument of song?
     # could clean up later once main() function gets cleared up
 
-    
+
 #NOTE: can give arg to song, let user choose genre
 @app.route("/stream/")
 def song():
-    url = processor.main('snowing',45)
+    if 'user' not in session:
+        return redirect(url_for(main()))
+    url = processor.main('snowing',45, session['user'])
     return render_template('streamingPage.html', url = url, userStatus=loggedIn())
 
 

@@ -59,6 +59,9 @@ started to fix playing fxn
 KateJ -- 2016-12-9 In class
 If you're not logged in, you can no longer access account settings or saved songs (added an error message)
 
+ShamaulD -- 2016-12-9 In class
+Worked on coordinating how apis will be implemented in app
+
 VannaM -- 2016-12-9 In class
 Module hell
 
@@ -86,3 +89,11 @@ still to do: testing on the dreaded linux, integrating this w/actual code
 MichaelW -- 2016-12-12 9:00-12:00
 successfuly obtains coordinates using geo ip api
 saved songs features should be working
+
+ShamaulD -- 2016-12-12 23:00-01:00
+testing functionality, started working on city to music movement
+
+ShamaulD -- 2016-12-13 20:00-21:30
+cleared up functions in app
+decided to use zip code instead of city
+got songs to work across different operating systems, dll file mixup
