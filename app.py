@@ -176,8 +176,8 @@ def choose():
 #NOTE: can give arg to song, let user choose genre
 @app.route("/stream/")
 def song():
-    url = processor.main('snowing',45)
-    return render_template('streamingPage.html', url = url, userStatus=loggedIn())
+    song = processor.main('snowing',45)
+    return render_template('streamingPage.html', url = song['url'], title = song['title'], artist = song['artist'], userStatus=loggedIn())
 
 
 if __name__ == "__main__":

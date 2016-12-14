@@ -32,7 +32,13 @@ def getTrack(givenGenre):
 
     n = random.randrange(1000)
     searchRet = spotify.search("genre:" + givenGenre, limit=1, offset=n, type='track')
-    return searchRet['tracks']['items'][0]['preview_url']
+
+    ret = {}
+
+    ret['url'] = searchRet['tracks']['items'][0]['preview_url']
+    ret['title'] = searchRet['tracks']['items'][0]['name']
+    ret['artist'] = searchRet['tracks']['items'][0]['artists'][0]['name']
+    return ret
 
 def main(condition, temp):
     if condition in genreList:
@@ -53,12 +59,6 @@ def main(condition, temp):
         db.close()  #close database
 
     return getTrack(genre)
-
-def pause():
-    player.pause()
-
-
-
 
 def get_saved_songs(username):
     f = "database.db"
