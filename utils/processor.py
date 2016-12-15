@@ -38,6 +38,7 @@ def getTrack(givenGenre):
     ret['url'] = searchRet['tracks']['items'][0]['preview_url']
     ret['title'] = searchRet['tracks']['items'][0]['name']
     ret['artist'] = searchRet['tracks']['items'][0]['artists'][0]['name']
+    ret['genre'] = givenGenre
     return ret
 
 def main(condition, temp):

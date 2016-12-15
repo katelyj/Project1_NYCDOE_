@@ -9,12 +9,10 @@ Home
 
 {% block content %}
 
-<h1 id="heading">Test1</h1><br>
-
 <div class="transbox">
 
-    <p>{{ title }}<br>
-    by {{ artist }}</p>
+    <p><h1>{{ title }}</h1>
+    <h3>by {{ artist }}</h3></p>
 
   <!--audio objects, because html is cool-->
   <!-- controls: pause; autoplay: autoplay; jscript: reload when finished playing -->
@@ -22,13 +20,7 @@ Home
     <source src= {{url}} type="audio/mpeg">
   </audio>
 
-</div>
-
-<h1 id="heading">Test2</h1><br>
-
-<div class="transbox">
-
-  <p>Hello part 2.</p>
+  <p><h4>Genre: {{genre}}</h4></p>
 
 </div>
 

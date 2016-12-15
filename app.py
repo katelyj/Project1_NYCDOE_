@@ -88,7 +88,6 @@ def main():
 def home():
     return render_template("streamingPage.html", userStatus=loggedIn())
 
-
 @app.route("/saved/")
 def save():
     if "user" not in session:
@@ -149,7 +148,7 @@ def search():
         #print checkZip(zipcode)
         if(checkZip(zipcode)):
             session["zipcode"] = zipcode
-            return redirect(url_for("home"))
+            stream()
         else:
             return redirect(url_for("main"))#, status = "Please enter a valid zipcode")
 
@@ -162,32 +161,42 @@ def search():
         return render_template("search.html", status = loc_msg)
 
 #NOTE: can give arg to song, let user choose genre
-@app.route("/stream/")
-def song():
+
+def getWeather():
     send_url = "http://api.openweathermap.org/data/2.5/forecast/"
+
     if "zipcode" in session:
         send_url += "weather?zip="
         z = session["zipcode"]
         send_url += z
         send_url += ",us"
+
     elif "coords" in session:
         send_url += "weather?lat="
         [c,o] = session["coords"]
         send_url += c
         send_url += "&lon="
         send_url += o
+
     else:
         return redirect(url_for("main")) #lol
+
     send_url += "&units=imperial"
-    # send_url += APPID
+    send_url += "&APPID=b2b943fba8b13d5ee10731cdade75c9a"
     # remember to deal with above
     r = requests.get(send_url)
     j = json.loads(r.text)
-    cond = j["weather"]["main"]
-    temp = j["main"]["temp"]
-    song = processor.main(cond,temp)
-    return render_template('streamingPage.html', url = song['url'], title = song['title'], artist = song['artist'], userStatus=loggedIn())
+    cond = j['list'][0]['weather'][0]['main']
+    temp = j['list'][0]['main']['temp']
+    return(cond, temp)
 
+@app.route("/stream/")
+def song():
+    args = getWeather()
+    cond = args[0]
+    temp = args[1]
+    song = processor.main(cond,temp)
+    return render_template('streamingPage.html', url = song['url'], title = song['title'], artist = song['artist'], genre = song['genre'], userStatus=loggedIn())
 
 
 if __name__ == "__main__":
