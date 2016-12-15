@@ -119,11 +119,11 @@ save songs
 
 KateJ -- 2016-12-14 23:00-23:30
 Styling, cleaning, final touches
+Made and uploaded Design Changes document
 
 VannaM -- 2016-12-14 23:20-24:55
 bug fixing, path fixing, organizing
 Fixed weird routing errors in navbar
-Made and uploaded Design Changes document
 
 MichaelW -- 2016-12-14 21:00-23:59
 -remove saved song feature

@@ -259,7 +259,7 @@ def getWeather():
         return redirect(url_for("main")) #lol
 
     send_url += "&units=imperial"
-    send_url += "&APPID=b2b943fba8b13d5ee10731cdade75c9a"#add KEY
+    send_url += "&APPID=" #add KEY
     # remember to deal with above
     r = requests.get(send_url)
     j = json.loads(r.text)
