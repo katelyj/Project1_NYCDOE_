@@ -11,19 +11,19 @@ Home
 
 <div class="transbox">
 
-    <p><h1>{{ title }}</h1>
-    <h3>by {{ artist }}</h3></p>
+  <p><h1 id="heading">{{ title }}</h1>
+    <h3>by: {{ artist }}</h3></p>
 
   <!--audio objects, because html is cool-->
   <!-- controls: pause; autoplay: autoplay; jscript: reload when finished playing -->
   <audio controls autoplay onended="javascript:window.location.reload();">
     <source src= {{url}} type="audio/mpeg">
   </audio>
+  
+  <p><h1 id="heading">Genre: {{genre}}</h1></p>
 
-  <p><h4>Genre: {{genre}}</h4></p>
-
-  <p><form action="/saved/" method="POST">
-  	<input type="submit" name="save_song" value="Save this song">
+  <form action="/saved/" method="POST">
+    <input type="submit" name="save_song" value="Save this song">
     <input type="hidden" name="url" value={{url}}>
     <input type="hidden" name="title" value={{title}}>
     <input type="hidden" name="artist" value={{artist}}>
