@@ -2,13 +2,13 @@
 
 <html>
 
-  
-  <head>
 
-    
+<head>
+
+
     <title>{% block title %} {% endblock %}</title>
 
-    
+
     <!-- use utf-8 chars -->
     <meta charset="utf-8">
     <!-- look pretty on mobile -->
@@ -19,103 +19,102 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    
+
     <!-- a place for all of your regular css stuff -->
 
     <style>
 
-      body {
+    body {
 
-      passing: 20px;
-      color: black;
-      background-color: #03256C;
-      background-image: url('http://i67.tinypic.com/zx5duf.jpg');
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: repeat;
-      text-align: center;
-      
-      }
+        passing: 20px;
+        color: black;
+        background-color: #03256C;
+        background-image: url('http://i67.tinypic.com/zx5duf.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: repeat;
+        text-align: center;
 
-      .bs-float-label {
-      position:relative;
-      border:1px solid lightsteelblue;
-      margin:10px;
-      padding:10px;
-      background-color: rgba(100,50,200,0.4);
-      }
+    }
 
-      .bs-float-label > .float-input {margin-top:10px;}
-      .bs-float-label > .float-input:focus {
-      }
+    .bs-float-label {
+        position:relative;
+        border:1px solid lightsteelblue;
+        margin:10px;
+        padding:10px;
+        background-color: rgba(100,50,200,0.4);
+    }
 
-      .bs-float-label > .float-label {
-      position:absolute; 
-      top:3px; 
-      left:10px; 
-      background: lightsteelblue; 
-      -webkit-transition: top .5s ease-in-out, opacity .5s ease-in-out;
-      transition: top .5s ease-in-out, opacity .5s ease-in-out;
-      opacity:0;
-      }
+    .bs-float-label > .float-input {margin-top:10px;}
+    .bs-float-label > .float-input:focus {
+    }
 
-      .bs-float-label > .float-label.show { color:#2BBBAD; top:1px; opacity:1; }
-      .bs-float-label > .float-label.on { color:blue; }
+    .bs-float-label > .float-label {
+        position:absolute;
+        top:3px;
+        left:10px;
+        background: lightsteelblue;
+        -webkit-transition: top .5s ease-in-out, opacity .5s ease-in-out;
+        transition: top .5s ease-in-out, opacity .5s ease-in-out;
+        opacity:0;
+    }
 
-      div.transbox {
-      margin: 15px;
-      background-color: #2BBBAD;
-      border: 1px solid black;
-      opacity: 0.6;
-      filter: alpha(opacity=60); /* For IE8 and earlier */
-      }
+    .bs-float-label > .float-label.show { color:#2BBBAD; top:1px; opacity:1; }
+    .bs-float-label > .float-label.on { color:blue; }
 
-      div.transbox p {
-      margin: 2%;
-      font-weight: bold;
-      color: black;
-      }
+    div.transbox {
+        margin: 15px;
+        background-color: #2BBBAD;
+        border: 1px solid black;
+        opacity: 0.6;
+        filter: alpha(opacity=60); /* For IE8 and earlier */
+    }
 
-      #heading {
-      color: #D5B0AC;
-      text-align: center;
-      font-size: 300%;
-      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-      line-height: 2;
-      }
-      
+    div.transbox p {
+        margin: 2%;
+        font-weight: bold;
+        color: black;
+    }
+
+    #heading {
+        color: #D5B0AC;
+        text-align: center;
+        font-size: 300%;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        line-height: 2;
+    }
+
     </style>
 
-    
-  </head>
+
+</head>
 
 
-  <body>
+<body>
 
     <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-      <div class="container-fluid">
-	<div class="navbar-header">
-	  <a class="navbar-brand" href="/home/">Radioing! In the Rain</a>
-	</div>
-	<ul class="nav navbar-nav">
-	  <li class="active"><a href="/home/">Home</a></li>
-	  <li><a href="/saved/">Saved Songs</a></li>
-	  <li><a href="/update/">Update Location</a></li>
-	</ul>
-	<ul class="nav navbar-nav navbar-right">
-	  <li><a href="/accountsettings/"><span class="glyphicon glyphicon-user"></span> Account Settings</a></li>
-	  <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> {{userStatus}}</a></li>
-	</ul>
-      </div>
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/home/">Radioing! In the Rain</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/home/">Home</a></li>
+                <li><a href="/saved/">Saved Songs</a></li>
+                <li><a href="/update/">Update Location</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/accountsettings/"><span class="glyphicon glyphicon-user"></span> Account Settings</a></li>
+                <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> {{userStatus}}</a></li>
+            </ul>
+        </div>
     </nav>
-    
+
     {% block content %}
 
     {% endblock %}
 
-    
-  </body>
+
+</body>
 
 
 </html>
-

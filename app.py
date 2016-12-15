@@ -9,6 +9,37 @@ f = "database.db"
 app = Flask(__name__)
 app.secret_key = '<j\x9ch\x80+\x0b\xd2\xb6\n\xf7\x9dj\xb8\x0fmrO\xce\xcd\x19\xd49\xe5S\x1f^\x8d\xb8"\x89Z'
 
+#--------GENERAL STUFF--------
+
+def loggedIn():
+    if "user" in session:
+        return "Logout"
+    return "Login"
+
+
+@app.route("/")
+@app.route("/main/")
+def main():
+    return render_template("main.html")
+
+
+@app.route("/home/", methods = ["GET","POST"])
+def home():
+    if 'user' not in session:
+        return render_template("main.html", userStatus=loggedIn())
+    else:
+        return redirect(url_for("stream"))
+
+
+
+
+
+
+
+
+
+
+#--------LOGIN STUFF--------
 
 def register(username, password):
     if (username=="" or password==""): return "Please fill in the username and password fields"
@@ -32,7 +63,6 @@ def register(username, password):
     db.close()
     return "You are now successfully registered."
 
-
 def checkLogin(username,password):
     hashedPass = hashlib.sha1(password).hexdigest()
     db = sqlite3.connect(f)
@@ -45,49 +75,42 @@ def checkLogin(username,password):
             else: return "Incorrect Password"
     return "Incorrect Username"
 
-
-def changePass(username,oldpass,newpass):
-    if (oldpass=="" or newpass==""): return "Please fill in both password fields"
-    hashedOldPass = hashlib.sha1(oldpass).hexdigest()
-    hashedNewPass = hashlib.sha1(newpass).hexdigest()
-    db = sqlite3.connect(f)
-    c = db.cursor()
-    d = db.cursor()
-    query = "SELECT * FROM users"
-    dbUserPass = c.execute(query)
-    for entry in dbUserPass:
-        if (entry[0] == username):
-            if (entry[1] == hashedOldPass):
-
-                updateQuery = "UPDATE users SET pass = \'%s\' WHERE user = \'%s\'"%(hashedNewPass,username)
-                d.execute(updateQuery)
-                db.commit()
-                db.close()
-                return "You have successfully changed your password"
-            else: return "You entered an incorrect password"
-
-
-def loggedIn():
+@app.route("/login/", methods = ["GET","POST"])
+def login():
     if "user" in session:
-        return "Logout"
-    return "Login"
+        return logout()
+
+    if request.method == "GET":
+        return render_template("login.html", status = "", userStatus=loggedIn())
+
+    if request.form["enter"] == "Register":
+        register_message = register(request.form["user"],request.form["pass"])
+        return render_template("login.html", status = register_message, userStatus=loggedIn())
+
+    if request.form["enter"] == "Login":
+        login_message = checkLogin(request.form["user"],request.form["pass"])
+        if (login_message == ""):
+            session["user"] = request.form["user"]
+            return redirect(url_for("home"))
+
+    return render_template("login.html", status = login_message, userStatus=loggedIn())
 
 
-def checkZip(zipcode):
-    if (len(str(zipcode)) != 5): return False
-    else: return True
+@app.route("/logout/")
+def logout():
+    if "user" in session: session.pop("user")
+    if "coords" in session: session.pop("coords")
+    return redirect(url_for("home"))
 
 
-@app.route("/")
-@app.route("/main/")
-def main():
-    return render_template("main.html")
 
 
-@app.route("/home/", methods = ["GET","POST"])
-def home():
-    return render_template("streamingPage.html", userStatus=loggedIn())
 
+
+
+
+
+#--------SONG SAVING STUFF--------
 
 @app.route("/saved/", methods = ["GET","POST"])
 def save():
@@ -120,33 +143,34 @@ def addSavedSong(url,user,title,artist):
     return "Your song has been saved"
 
 
-@app.route("/login/", methods = ["GET","POST"])
-def login():
-    if "user" in session:
-        return logout()
 
-    if request.method == "GET":
-        return render_template("login.html", status = "", userStatus=loggedIn())
 
-    if request.form["enter"] == "Register":
-        register_message = register(request.form["user"],request.form["pass"])
-        return render_template("login.html", status = register_message, userStatus=loggedIn())
 
-    if request.form["enter"] == "Login":
-        login_message = checkLogin(request.form["user"],request.form["pass"])
-        if (login_message == ""):
-            session["user"] = request.form["user"]
-            return redirect(url_for("home"))
 
-        return render_template("login.html", status = login_message, userStatus=loggedIn())
 
-    
-@app.route("/logout/")
-def logout():
-    if "user" in session: session.pop("user")
-    if "coords" in session: session.pop("coords")
-    return redirect(url_for("home"))
 
+
+#--------ACCOUNT STUFF--------
+
+def changePass(username,oldpass,newpass):
+    if (oldpass=="" or newpass==""): return "Please fill in both password fields"
+    hashedOldPass = hashlib.sha1(oldpass).hexdigest()
+    hashedNewPass = hashlib.sha1(newpass).hexdigest()
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    d = db.cursor()
+    query = "SELECT * FROM users"
+    dbUserPass = c.execute(query)
+    for entry in dbUserPass:
+        if (entry[0] == username):
+            if (entry[1] == hashedOldPass):
+
+                updateQuery = "UPDATE users SET pass = \'%s\' WHERE user = \'%s\'"%(hashedNewPass,username)
+                d.execute(updateQuery)
+                db.commit()
+                db.close()
+                return "You have successfully changed your password"
+            else: return "You entered an incorrect password"
 
 @app.route("/accountsettings/", methods = ["POST", "GET"])
 def accountsettings():
@@ -159,10 +183,22 @@ def accountsettings():
     return render_template("accountSettings.html", status = pass_message, userStatus=loggedIn())
 
 
+
+
+
+
+
+
+
+#--------LOCATING STUFF--------
+
+def checkZip(zipcode):
+    if (len(str(zipcode)) != 5): return False
+    else: return True
+
 @app.route("/update/", methods = ["POST", "GET"])
 def updateLocation():
     return redirect(url_for("main"))
-
 
 @app.route("/search/", methods=["GET", "POST"])
 def search():
@@ -180,7 +216,7 @@ def search():
         #print checkZip(zipcode)
         if(checkZip(zipcode)):
             session["zipcode"] = zipcode
-            return song()
+            return redirect(url_for("stream"))
         else:
             return redirect(url_for("main"))#, status = "Please enter a valid zipcode")
 
@@ -191,9 +227,18 @@ def search():
         session["coords"] = [lat,lon]
         return render_template("search.html", status = loc_msg)
 
-    
+
 #NOTE: can give arg to song, let user choose genre
 
+
+
+
+
+
+
+
+
+#--------WEATHER STUFF--------
 
 def getWeather():
     send_url = "http://api.openweathermap.org/data/2.5/forecast/"
@@ -215,7 +260,7 @@ def getWeather():
         return redirect(url_for("main")) #lol
 
     send_url += "&units=imperial"
-    send_url += "&APPID=b2b943fba8b13d5ee10731cdade75c9a"#add KEY
+    send_url += "&APPID="#add KEY
     # remember to deal with above
     r = requests.get(send_url)
     j = json.loads(r.text)
@@ -224,8 +269,17 @@ def getWeather():
     return(cond, temp)
 
 
+
+
+
+
+
+
+
+#--------STREAMING STUFF--------
+
 @app.route("/stream/")
-def song():
+def stream():
     args = getWeather()
     cond = args[0]
     temp = args[1]
