@@ -117,16 +117,12 @@ def save():
     if "user" not in session:
         return redirect(url_for("login"))
     if "save_song" in request.form:
-        print "starting"
         song_url = request.form['url']
-        print song_url
         artist = request.form['artist']
-        print artist
         title = request.form['title']
-        print title
-        print song_url + "  " + title + "  " + artist
         saved_msg = addSavedSong(song_url,session["user"],title,artist)
-        print "saved"
+    if "remove_song" in request.form:
+        removeSavedSong(request.form["url"],session["user"])
     song_str = processor.get_saved_songs(session["user"])
     return render_template("savedSongs.html", userStatus=loggedIn(), song_html=song_str)
 
@@ -142,8 +138,17 @@ def addSavedSong(url,user,title,artist):
 
     return "Your song has been saved"
 
+def removeSavedSong(url,user):
+    db = sqlite3.connect(f)
+    c = db.cursor()
 
+    removeQuery = "DELETE FROM SavedSongs WHERE url=\'%s\'"%(url)
+    c.execute(removeQuery)
 
+    db.commit()
+    db.close()
+
+    return "Your song has been saved"
 
 
 
@@ -212,13 +217,11 @@ def search():
     #zipcode
     if "zipcode" in request.form:
         zipcode = request.form["zipcode"]
-        #print(request.form["zipcode"])
-        #print checkZip(zipcode)
         if(checkZip(zipcode)):
             session["zipcode"] = zipcode
             return redirect(url_for("stream"))
         else:
-            return redirect(url_for("main"))#, status = "Please enter a valid zipcode")
+            return redirect(url_for("main"))
 
     #coords
     else:
@@ -226,10 +229,6 @@ def search():
         loc_msg = "We found your location: (%s , %s)"%(lat,lon)
         session["coords"] = [lat,lon]
         return render_template("search.html", status = loc_msg)
-
-
-#NOTE: can give arg to song, let user choose genre
-
 
 
 
@@ -260,7 +259,7 @@ def getWeather():
         return redirect(url_for("main")) #lol
 
     send_url += "&units=imperial"
-    send_url += "&APPID="#add KEY
+    send_url += "&APPID=b2b943fba8b13d5ee10731cdade75c9a"#add KEY
     # remember to deal with above
     r = requests.get(send_url)
     j = json.loads(r.text)

@@ -68,7 +68,9 @@ def get_saved_songs(username):
     query = "SELECT * FROM SavedSongs where user = \'%s\'"%(username)
     dbSavedSongs = c.execute(query)
     for entry in dbSavedSongs:
-        song_str+= "<a href=%s> %s by %s </a><br>"%(entry[0], entry[2], entry[3])
+        song_str+= "<a href=%s> %s by %s </a>"%(entry[0], entry[2], entry[3])
+        song_str+= "<form method=\"POST\"><input type=\"submit\" value=\"Remove\" name=\"remove_song\">"
+        song_str+="<input type=\"hidden\" name=\"url\" value=\"%s\"></form><br><br>"%(entry[0])
         song_count+=1
     if (song_count == 0): song_str+= "You currently have no songs saved."
     return song_str
