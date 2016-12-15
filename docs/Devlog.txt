@@ -102,6 +102,9 @@ VannaM -- 2016-12-13 21:30-23:00
 made everything server side (instead of python)
 music player stuff, etc.
 
+MichaelW -- 2016-12-13 20:00-23:00
+allow user to input zipcode
+
 VannaM -- 2016-12-14 08:10-08:40
 aesthetically pleasing music player (title, artist, genre)
 
@@ -121,3 +124,6 @@ VannaM -- 2016-12-14 23:20-24:55
 bug fixing, path fixing, organizing
 Fixed weird routing errors in navbar
 Made and uploaded Design Changes document
+
+MichaelW -- 2016-12-14 21:00-23:59
+-remove saved song feature
