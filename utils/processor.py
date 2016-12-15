@@ -28,7 +28,8 @@ def getTrack(givenGenre):
 
     spotify = spotipy.Spotify()
 
-    n = random.randrange(1000)
+    #picked b/c # spotify songs/genre not available, but big number
+    n = random.randrange(10000)
     searchRet = spotify.search("genre:" + givenGenre, limit=1, offset=n, type='track')
 
     ret = {}

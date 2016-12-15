@@ -81,7 +81,7 @@ def addSavedSong(url,user):
     c = db.cursor()
     insertQuery = "INSERT INTO SavedSongs VALUES(\'%s\',\'%s\')"%(url,user)
     c.execute(query)
-    
+
     db.commit()
     db.close()
 
@@ -201,7 +201,7 @@ def getWeather():
         return redirect(url_for("main")) #lol
 
     send_url += "&units=imperial"
-    #send_url += "key?"
+    send_url += "&APPID="#{KEY}
     # remember to deal with above
     r = requests.get(send_url)
     j = json.loads(r.text)
