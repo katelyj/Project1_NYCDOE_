@@ -1,10 +1,3 @@
 TO DO LIST:
 
-- Saved songs
-- Music player
-- Like all the API stuff lol
-- Design changes document
-- allow input their zipcode
-- make stuff look nice
-- get the weather using coords -> play music
-- organize site map? 
+We got it! Good work, everyone!

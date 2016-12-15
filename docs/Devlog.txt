@@ -113,3 +113,6 @@ little tweaks to get things to play properly (redirecting stuff, change paramete
 
 VannaM -- 2016-12-14 21:45-22:05
 save songs
+
+KateJ -- 2016-12-14 23:00-23:30
+Last styling, final touches
