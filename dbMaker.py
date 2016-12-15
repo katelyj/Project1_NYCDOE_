@@ -9,7 +9,7 @@ q = "CREATE TABLE users (user TEXT, pass TEXT)"
 c.execute(q)
 
 
-q = "CREATE TABLE SavedSongs (url STR, user TEXT)"
+q = "CREATE TABLE SavedSongs (url TEXT, user TEXT, title TEXT, artist TEXT)"
 c.execute(q)
 
 #q = "INSERT INTO SavedSongs VALUES(%d,'%s',%d)"%(0,michael,123)

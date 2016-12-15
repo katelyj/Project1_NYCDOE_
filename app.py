@@ -76,17 +76,6 @@ def checkZip(zipcode):
     if (len(str(zipcode)) != 5): return False
     else: return True
 
-def addSavedSong(url,user):
-    db = sqlite3.connect(f)
-    c = db.cursor()
-    insertQuery = "INSERT INTO SavedSongs VALUES(\'%s\',\'%s\')"%(url,user)
-    c.execute(query)
-
-    db.commit()
-    db.close()
-
-    return "Your song has been saved"
-
 
 @app.route("/")
 @app.route("/main/")
@@ -98,16 +87,35 @@ def main():
 def home():
     return render_template("main.html")
 
+
 @app.route("/saved/", methods = ["GET","POST"])
 def save():
     if "user" not in session:
         return redirect(url_for("login"))
-    #if "save_song" in request.form:
-        #song_url = ??
-        #saved_msg = addSavedSong(song_url,session["user"])
+    if "save_song" in request.form:
+        print "starting"
+        song_url = request.form['url']
+        print song_url
+        artist = request.form['artist']
+        print artist
+        title = request.form['title']
+        print title
+        print song_url + "  " + title + "  " + artist
+        saved_msg = addSavedSong(song_url,session["user"],title,artist)
+        print "saved"
     song_str = processor.get_saved_songs(session["user"])
     return render_template("savedSongs.html", userStatus=loggedIn(), song_html=song_str)
 
+def addSavedSong(url,user,title,artist):
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    query = "INSERT INTO SavedSongs VALUES(\'%s\',\'%s\', \'%s\',\'%s\')"%(url,user,title,artist)
+    c.execute(query)
+
+    db.commit()
+    db.close()
+
+    return "Your song has been saved"
 
 @app.route("/login/", methods = ["GET","POST"])
 def login():
@@ -201,7 +209,7 @@ def getWeather():
         return redirect(url_for("main")) #lol
 
     send_url += "&units=imperial"
-    send_url += "&APPID="#{KEY}
+    send_url += "&APPID"#add KEY
     # remember to deal with above
     r = requests.get(send_url)
     j = json.loads(r.text)
