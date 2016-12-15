@@ -115,4 +115,6 @@ VannaM -- 2016-12-14 21:45-22:05
 save songs
 
 KateJ -- 2016-12-14 23:00-23:30
-Last styling, final touches
+Styling, cleaning, final touches
+Fixed weird routing errors in navbar
+Made and uploaded Design Changes document
