@@ -161,23 +161,33 @@ def search():
         #print(session["coords"])
         return render_template("search.html", status = loc_msg)
 
-
-#@app.route("/find_me/", methods=["GET", "POST"])
-#def find_me():
-
-
-
-@app.route("/choose/")
-def choose():
-    return render_template("main.html") # argument of song?
-    # could clean up later once main() function gets cleared up
-
-
 #NOTE: can give arg to song, let user choose genre
 @app.route("/stream/")
 def song():
-    song = processor.main('snowing',45)
+    send_url = "http://api.openweathermap.org/data/2.5/forecast/"
+    if "zipcode" in session:
+        send_url += "weather?zip="
+        z = session["zipcode"]
+        send_url += z
+        send_url += ",us"
+    elif "coords" in session:
+        send_url += "weather?lat="
+        [c,o] = session["coords"]
+        send_url += c
+        send_url += "&lon="
+        send_url += o
+    else:
+        return redirect(url_for("main")) #lol
+    send_url += "&units=imperial"
+    # send_url += APPID
+    # remember to deal with above
+    r = requests.get(send_url)
+    j = json.loads(r.text)
+    cond = j["weather"]["main"]
+    temp = j["main"]["temp"]
+    song = processor.main(cond,temp)
     return render_template('streamingPage.html', url = song['url'], title = song['title'], artist = song['artist'], userStatus=loggedIn())
+
 
 
 if __name__ == "__main__":

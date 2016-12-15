@@ -1,4 +1,4 @@
-import sqlite3, urllib2, spotipy, random, json, os
+import sqlite3, urllib2, spotipy, random, json, os, requests
 
 
 special = ['snowing','raining','cloudy']
@@ -81,6 +81,3 @@ def get_loc_coords():
     lat = j['latitude']
     lon = j['longitude']
     return lat,lon
-
-
-    return html

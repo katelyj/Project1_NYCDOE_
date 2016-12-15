@@ -98,6 +98,9 @@ cleared up functions in app
 decided to use zip code instead of city
 got songs to work across different operating systems, dll file mixup
 
-VannaM -- 2015-12-13 21:30-23:00
+VannaM -- 2016-12-13 21:30-23:00
 made everything server side (instead of python)
 music player stuff, etc.
+
+ShamaulD -- 2016-12-14 18:30-20:00
+made location to weather to song function, appid commented out
