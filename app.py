@@ -72,6 +72,7 @@ def loggedIn():
         return "Logout"
     return "Login"
 
+
 def checkZip(zipcode):
     if (len(str(zipcode)) != 5): return False
     else: return True
@@ -85,7 +86,7 @@ def main():
 
 @app.route("/home/", methods = ["GET","POST"])
 def home():
-    return render_template("main.html")
+    return render_template("streamingPage.html", userStatus=loggedIn())
 
 
 @app.route("/saved/", methods = ["GET","POST"])
@@ -106,6 +107,7 @@ def save():
     song_str = processor.get_saved_songs(session["user"])
     return render_template("savedSongs.html", userStatus=loggedIn(), song_html=song_str)
 
+
 def addSavedSong(url,user,title,artist):
     db = sqlite3.connect(f)
     c = db.cursor()
@@ -116,6 +118,7 @@ def addSavedSong(url,user,title,artist):
     db.close()
 
     return "Your song has been saved"
+
 
 @app.route("/login/", methods = ["GET","POST"])
 def login():
@@ -137,6 +140,7 @@ def login():
 
         return render_template("login.html", status = login_message, userStatus=loggedIn())
 
+    
 @app.route("/logout/")
 def logout():
     if "user" in session: session.pop("user")
@@ -187,7 +191,9 @@ def search():
         session["coords"] = [lat,lon]
         return render_template("search.html", status = loc_msg)
 
+    
 #NOTE: can give arg to song, let user choose genre
+
 
 def getWeather():
     send_url = "http://api.openweathermap.org/data/2.5/forecast/"
@@ -209,13 +215,14 @@ def getWeather():
         return redirect(url_for("main")) #lol
 
     send_url += "&units=imperial"
-    send_url += "&APPID"#add KEY
+    send_url += "&APPID=b2b943fba8b13d5ee10731cdade75c9a"#add KEY
     # remember to deal with above
     r = requests.get(send_url)
     j = json.loads(r.text)
     cond = j['list'][0]['weather'][0]['main']
     temp = j['list'][0]['main']['temp']
     return(cond, temp)
+
 
 @app.route("/stream/")
 def song():
