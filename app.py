@@ -86,7 +86,7 @@ def main():
 
 @app.route("/home/", methods = ["GET","POST"])
 def home():
-    return render_template("streamingPage.html", userStatus=loggedIn())
+    return render_template("main.html")
 
 @app.route("/saved/")
 def save():
@@ -141,6 +141,13 @@ def updateLocation():
 
 @app.route("/search/", methods=["GET", "POST"])
 def search():
+
+    #clear
+    if 'zipcode' in session:
+        session.pop('zipcode')
+    if 'coords' in session:
+        session.pop('coords')
+
     #zipcode
     if "zipcode" in request.form:
         zipcode = request.form["zipcode"]
@@ -148,7 +155,7 @@ def search():
         #print checkZip(zipcode)
         if(checkZip(zipcode)):
             session["zipcode"] = zipcode
-            stream()
+            return song()
         else:
             return redirect(url_for("main"))#, status = "Please enter a valid zipcode")
 
@@ -157,7 +164,6 @@ def search():
         lat,lon = processor.get_loc_coords()
         loc_msg = "We found your location: (%s , %s)"%(lat,lon)
         session["coords"] = [lat,lon]
-        #print(session["coords"])
         return render_template("search.html", status = loc_msg)
 
 #NOTE: can give arg to song, let user choose genre
@@ -174,9 +180,9 @@ def getWeather():
     elif "coords" in session:
         send_url += "weather?lat="
         [c,o] = session["coords"]
-        send_url += c
+        send_url += str(c)
         send_url += "&lon="
-        send_url += o
+        send_url += str(o)
 
     else:
         return redirect(url_for("main")) #lol

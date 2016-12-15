@@ -1,15 +1,13 @@
 import sqlite3, urllib2, spotipy, random, json, os, requests
 
 
-special = ['snowing','raining','cloudy']
-genreList = ["christmas","alternative pop/rock", "blues", "classical", "rock", "rap", "folk", "latin"]
+special = ['Snow','Rain','Clouds']
+genreList = ["christmas","pop", "blues", "classical", "rock", "rap", "folk", "latin"]
 
 
 #returns the temperature condition given the current temperature
 #if there is an issue w/temp, just return "nice" by default
 def tempCondition(temp):
-    if not isinstance(temp,int):
-        return "nice"
     if temp < 0:
         return "freezing"
     if temp < 40:
@@ -47,7 +45,6 @@ def main(condition, temp):
     else:
         if condition not in special:
             condition = tempCondition(temp)
-
         #db stuff
         f="database.db"
         db = sqlite3.connect(f) #open if f exists, otherwise create
